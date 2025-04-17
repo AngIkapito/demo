@@ -1,0 +1,48 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>TracKaPSITE</title>
+        <link rel="icon" type="image/x-icon" href=" {% static "img/favicon.ico" %}" />
+        <!-- Font Awesome icons (free version) - USED in FOOTER-->
+        <!-- Google fonts-->
+       <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        {% comment  %} ITO YUNG CSS PARA SA ADMIN-USER SIDE
+         <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}"> {% endcomment %}
+
+         <style>
+        
+    
+            h1, h2 {
+                color: #0033a0; /* Blue */
+            }
+      
+        </style>
+
+    </head>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" style="background-color: rgba(55, 129, 204, 0.8);">
+    {% load static %}
+            <div class="container px-5">
+                <a class="navbar-brand" href=" {% url "home" %} "><img src="{% static "img/trackapsitelogo.png" %}" width="130" height="37" alt="TracKaPSITElogo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url "home" %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href=" {% url "announcement" %} ">Announcements</a></li>
+                        <li class="nav-item"><a class="nav-link" href=" {% url "event" %} ">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href=" {% url "about" %} ">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href=" {% url "contact" %} ">Contact Us</a></li>
+                        {% comment "" %}<li class="nav-item"><a class="nav-link" href="{% url "registration" %}">Register</a></li>{% endcomment %}
+                        <li class="nav-item"><a class="nav-link" href=" {% url "login" %} ">Log In</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

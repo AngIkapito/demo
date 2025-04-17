@@ -1,0 +1,107 @@
+{% comment %} {% block 'template' %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="Contact PSITE" />
+      <meta name="author" content="" />
+      <title>Contact Us - PSITE</title>
+      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      {% comment %} <!-- Font Awesome icons (free version) - USED in FOOTER-->
+      <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+      {% endcomment %}
+    </head>
+
+<br><br><br><br><br><br>
+{% comment "" %}{% endcomment %}
+<body id="page-top">
+  
+  <!-- Navigation-->
+  {% include "header.html" %}
+
+  <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh; max-width: 1000px; margin: 0 auto;">
+    
+    <div class="container" id="contact">
+      <h2>Contact Us</h2>
+      <p>Use the form below to send us an inquiry. Alternatively, you may also email PSITE National directly at <a href="mailto:info@psite.org">info@psite.org</a>.</p>
+      
+      <h3>Social Media</h3>
+      <p>Follow PSITE National on Facebook and YouTube to get the latest updates within our diverse community.</p>
+      <ul>
+          <li><a href="https://www.facebook.com/psiteregion3" target="_blank">Official Facebook Page</a></li>
+          <li><a href="https://www.facebook.com/groups/742526482436870" target="_blank">Official Facebook Group</a></li>
+          <li><a href="https://www.youtube.com/@psitecentralluzon899" target="_blank">Official YouTube Channel</a></li>
+      </ul>
+
+      <h3>FAQs</h3>
+      <p>We may have the answer you were looking for. Browse through our list of frequently asked questions below to know more.</p>
+      <ul>
+          <li><strong>Who can join PSITE?</strong> Any Filipino educators or academic institutions under the Computer Science, Information Technology, Information Systems, Multimedia Education, and related programs may join through their respective PSITE Regional Chapters.</li>
+          <li><strong>How do I join PSITE?</strong> PSITE Membership is managed by each Regional Chapter. You may access their respective Membership Registration Form online.</li>
+          <li><strong>What are the Membership Types?</strong> There are 3 types of PSITE Membership: Institutional, Individual, and Enterprise.</li>
+          <li><strong>How much is the membership?</strong> Institutional: PHP 3,000.00, Individual: PHP 500.00, Enterprise: PHP 5,000.00.</li>
+          <li><strong>How will I get a Membership Certificate?</strong> The Membership Certificate is issued by your Regional Chapter.</li>
+      </ul>
+
+      
+      <div class="card">
+        <div class="card-body">
+        <h3>Contact Form</h3>
+        
+      <form>
+          <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name*</label>
+              <input type="text" class="form-control" id="fullName" required>
+          </div>
+          <div class="mb-3">
+              <label for="institution" class="form-label">Institution*</label>
+              <input type="text" class="form-control" id="institution" required>
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Email*</label>
+              <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+              <label for="type" class="form-label">Type*</label>
+              <select class="form-control" id="type" required>
+                <option value="" disabled selected>Please choose an option</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Membership">Membership</option>
+                <option value="ICITE">ICITE</option>
+                <option value="NATCON">NATCON</option>
+                <option value="Sponsorship">Sponsorship</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="subject" class="form-label">Subject*</label>
+            <input type="text" class="form-control" id="subject" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message*</label>
+            <textarea class="form-control" id="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+</div>
+</div>
+
+  <br>
+  <!-- ADD MORE CONTENTS HERE, DYNAMIC -->
+
+  <br><br><br>
+  {% comment "CENTERED DIV" %}{% endcomment %}
+</div>
+{% comment "CENTERED DIV" %}{% endcomment %}
+
+<!-- Footer-->
+{% include "footer.html" %}
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+</body>
+
+{% comment %} {% endblock %} {% endcomment %}

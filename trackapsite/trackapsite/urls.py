@@ -1,0 +1,77 @@
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from .import views
+
+from .import views, hoo_views, member_views, officer_views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.HOME, name='home'),
+    path('about/', views.ABOUT, name='about'),
+    path('contact/', views.CONTACT, name='contact'),
+    path('announcement/', views.ANNOUNCEMENT, name='announcement'),
+    path('event/', views.EVENT, name='event'),
+    path('base/',views.BASE,name='base'),
+    path('registration/', views.REGISTRATION, name='registration'),
+    path('registration_bypass/', views.REGISTRATION_BYPASS, name='registration_bypass'),
+    path('registration_bypass1/', views.REGISTRATION_BYPASS1, name='registration_bypass1'),
+    # path('forgot_password/', views.FORGOT_PASSWORD, name='forgot_password'),
+
+    #Login
+    path('login', views.LOGIN,name='login'),
+    path('doLogin', views.doLogin, name='doLogin'),
+    path('doLogout', views.doLogout, name='logout'),
+    
+    # Profile Update
+    path('profile', views.PROFILE,name='profile'),
+    path('profile/update',views.PROFILE_UPDATE, name='profile_update'),
+    
+    #President/Admin/Head of Organization Panel
+    path('hoo/home', hoo_views.home, name='hoo_home'),
+    # path('hoo/member_detail', hoo_views.MEMBER_DETAIL, name='member_detail'),
+    
+    #add Member
+    path('hoo/Member/Add', hoo_views.ADD_MEMBER, name='add_member'),
+    path('hoo/Member/ViewAll', hoo_views.VIEWALL_MEMBER, name='viewall_member'),
+    path('hoo/Member/Edit/<str:id>', hoo_views.EDIT_MEMBER, name='edit_member'),
+    path('hoo/Member/Update', hoo_views.UPDATE_MEMBER, name='update_member'),
+    path('hoo/Member/Delete/<str:id>', hoo_views.DELETE_MEMBER, name='delete_member'),
+    
+    #Add Schoolyear/Cycle
+    path('hoo/SchoolYear/Add', hoo_views.ADD_SCHOOLYEAR, name='add_schoolyear'),
+    path('hoo/SchoolYear/View', hoo_views.VIEW_SCHOOLYEAR, name='view_schoolyear'),
+    path('hoo/SchoolYear/Edit/<str:id>', hoo_views.EDIT_SCHOOLYEAR, name='edit_schoolyear'),
+    path('hoo/SchoolYear/Update', hoo_views.UPDATE_SCHOOLYEAR, name='update_schoolyear'),
+    path('hoo/SchoolYear/Delete/<str:id>', hoo_views.DELETE_SCHOOLYEAR, name='delete_schoolyear'),
+    
+    #Add MembershipType
+    # path('hoo/MembershipType/Add', hoo_views.ADD_MEMBERSHIPTYPE, name='add_membershiptype'),
+    # path('hoo/MembershipType/View', hoo_views.VIEW_MEMBERSHIPTYPE, name='view_membershiptype'),
+    # path('hoo/MembershipType/Edit/<str:id>', hoo_views.EDIT_MEMBERSHIPTYPE, name='edit_membershiptype'),
+    # path('hoo/MembershipType/Update', hoo_views.UPDATE_MEMBERSHIPTYPE, name='update_membershiptype'),
+    # path('hoo/MembershipType/Delete/<str:id>', hoo_views.DELETE_MEMBERSHIPTYPE, name='delete_membershiptype'),
+    
+    #Add MemberType
+    # path('hoo/MemberType/Add', hoo_views.ADD_MEMBERTYPE, name='add_membertype'),
+    # path('hoo/MemberType/View', hoo_views.VIEW_MEMBERTYPE, name='view_membertype'),
+    # path('hoo/MemberType/Edit/<str:id>', hoo_views.EDIT_MEMBERTYPE, name='edit_membertype'),
+    # path('hoo/MemberType/Update', hoo_views.UPDATE_MEMBERTYPE, name='update_membertype'),
+    # path('hoo/MemberType/Delete/<str:id>', hoo_views.DELETE_MEMBERTYPE, name='delete_membertype'),
+    
+    #Add Salutation
+    # path('hoo/Salutation/Add', hoo_views.ADD_SALUTATION, name='add_salutation'),
+    # path('hoo/Salutation/View', hoo_views.VIEW_SALUTATION, name='view_salutation'),
+    # path('hoo/Salutation/Edit/<str:id>', hoo_views.EDIT_SALUTATION, name='edit_salutation'),
+    # path('hoo/Salutation/Update', hoo_views.UPDATE_SALUTATION, name='update_salutation'),
+    # path('hoo/Salutation/Delete/<str:id>', hoo_views.DELETE_SALUTATION, name='delete_salutation'),
+    
+    #Officer Panel
+    path('officer/home', officer_views.home, name='officer_home'),
+    
+    #Member Panel
+    path('member/home', member_views.home, name='member_home'),
+    #path('member/registration_member', member_views.REGISTRATION_MEMBER, name='registration_member'),
+    
+]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

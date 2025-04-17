@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Detail</title>
+</head>
+<body>
+    <h1>Member Information</h1>
+    <img src="{{ profile_pic }}" alt="Profile Picture" />
+    <p><strong>Salutation:</strong> {{ salutation }}</p>
+    <p><strong>First Name:</strong> {{ first_name }}</p>
+    <p><strong>Middle Name:</strong> {{ middle_name }}</p>
+    <p><strong>Last Name:</strong> {{ last_name }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <p><strong>Contact Number:</strong> {{ contact_no }}</p>
+    <p><strong>Birthdate:</strong> {{ birthdate }}</p>
+    <p><strong>Membership Type:</strong> {{ membership_type }}</p>
+    <p><strong>Member Type:</strong> {{ member_type }}</p>
+    <p><strong>Position:</strong> {{ position }}</p>
+    <p><strong>Facebook Profile:</strong> <a href="{{ facebook_profile_link }}">{{ facebook_profile_link }}</a></p>
+    <p><strong>Payment Date:</strong> {{ payment_date }}</p>
+    <p><strong>Terms Accepted:</strong> {{ terms_accepted }}</p>
+    <p><strong>Proof of Payment:</strong> <a href="{{ proof_of_payment }}">Download</a></p>
+</body>
+</html>
