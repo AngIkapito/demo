@@ -11,9 +11,15 @@
 
 <!-- DITO KA MAS START MAGLAGAY NG LAMAN NG BODY -->
 <div class="col-sm-12">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Add Cycle</h1>
-    </div>
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <a href="{% url 'hoo_home' %}" class="btn btn-secondary" title="Go Back">
+          <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
+      </a>
+      <div class="text-center flex-grow-1">
+          <h1 class="h3 mb-0 text-gray-800">Add Cycle</h1>
+      </div>
+  </div>
+
  </div>
 <!-- Page Heading -->
 
@@ -25,20 +31,21 @@
 
 
        <div class="col-sm-11">
-          <div class="form-group">
+          {% comment %} <div class="form-group"> {% endcomment %}
              <label>Start of Cycle</label>
-             <input type="date" class="form-control form-control-user" name="sy_start" required>
-          </div>
+             <input type="date" class="form-control" name="sy_start" required>
+          {% comment %} </div> {% endcomment %}
        </div>
 
        <div class="col-sm-11">
-        <div class="form-group">
+        {% comment %} <div class="form-group"> {% endcomment %}
            <label>End of Cycle</label>
-           <input type="date" class="form-control form-control-user" name="sy_end" required>
-        </div>
-     </div>
+           <input type="date" class="form-control" name="sy_end" required>
+        {% comment %} </div> {% endcomment %}
+      </div>
 
-       <div class="col-12">
+       <div class="col-sm">
+         <br>
           <button type="submit" class="btn btn-primary">Add Cycle</button>
        </div>
    

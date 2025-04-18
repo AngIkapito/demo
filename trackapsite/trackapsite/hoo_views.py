@@ -22,6 +22,7 @@ def ADD_SCHOOLYEAR(request):
         school_year = School_Year (
             sy_start = sy_start,
             sy_end = sy_end,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
         )
         school_year.save()
         messages.success(request, 'Cycle successfully added!')
@@ -84,7 +85,6 @@ def ADD_MEMBER(request):
         # is_superuser = request.POST.get('is_superuser')
         # is_active = request.POST.get('is_active')
         # user_type = request.POST.get('user_type')
-        # membershiptype_id = request.POST.get('membershiptype_id').upper()
         
         membershiptype_id = request.POST.get('membershiptype_id')
         membertype_id = request.POST.get('membertype_id')
@@ -178,30 +178,64 @@ def ADD_MEMBER(request):
     return render(request, 'hoo/add_member.html', context)
 
 def VIEWALL_MEMBER(request):
+    # customuser = request.user
     customuser = CustomUser.objects.all()
+    members = Member.objects.all()
+    salutations = Salutation.objects.all()
+    membershiptypes = MembershipType.objects.all()
+    membertypes = MemberType.objects.all()
+    officertypes = OfficerType.objects.all()
+    organizations = Organization.objects.all()
     
     context = {
         'customuser':customuser,
+        'members':members,
+        'salutations': salutations,  # Pass the salutations to the template
+        'membershiptypes':membershiptypes,
+        'membertypes': membertypes,
+        'officertypes': officertypes,
+        'organizations': organizations,
     }
     # print(customuser)
     return render(request, 'hoo/viewall_member.html', context)
 
 def EDIT_MEMBER(request, id):
-    # customuser = CustomUser.objects.all()
-    customuser = CustomUser.objects.filter(id = id)
     salutations = Salutation.objects.all()
     membershiptypes = MembershipType.objects.all()
     membertypes = MemberType.objects.all()
+    officertypes = OfficerType.objects.all()
+    organizations = Organization.objects.all()
+    
+    # Attempt to retrieve the Member object
+    # try:
+    # member = Member.objects.get(id=id)
+    member = get_object_or_404(Member, id=id)
+    # except Member.DoesNotExist:
+    #     return redirect('error_page')  # Redirect to an error page if the member does not exist
+
+    # Retrieve the associated CustomUser  (admin)
+    selected_user = member.admin  # Assuming 'admin' is a ForeignKey to CustomUser 
+
+    # Retrieve other necessary data
+    if request.method == 'POST':
+        form = Member(request.POST, instance=member)
+        if form.is_valid():
+            form.save()  # Save the updated member
+            return redirect('success_page')  # Redirect to a success page or member detail page
+    else:
+        form = Member(instance=member)  # Pre-fill the form with the current member data
     
     context = {
-        # 'customusers':customusers,
-        'customuser':customuser,
-        'salutations': salutations,
-        'membershiptypes':membershiptypes,
+        'selected_user': selected_user,  # Pass the selected user to the template
+        'member': member,
+        'salutations': salutations,  # Pass the salutations to the template
+        'membershiptypes': membershiptypes,
         'membertypes': membertypes,
+        'officertypes': officertypes,
+        'organizations': organizations,
     }
     
-    return render(request,'hoo/edit_member.html', context)
+    return render(request, 'hoo/edit_member.html', context)
 
 def UPDATE_MEMBER(request):
     if request.method == "POST":
@@ -225,7 +259,7 @@ def UPDATE_MEMBER(request):
         facebook_profile_link = request.POST.get('facebook_profile_link')
         # proof_of_payment = request.FILES.get('proof_of_payment')
         payment_date = request.POST.get('payment_date')
-        # terms_accepted = request.POST.get('terms_accepted')
+        terms_accepted = request.POST.get('terms_accepted')
         
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -254,9 +288,11 @@ def UPDATE_MEMBER(request):
         customuser.birthdate = birthdate
         customuser.facebook_profile_link = facebook_profile_link
         customuser.payment_date = payment_date
+        customuser.terms_accepted = terms_accepted
         
         customuser.username = username
         customuser.password = password
+        
         
         # Retrieve the user object or return a 404 error if not found
         
@@ -275,28 +311,14 @@ def DELETE_MEMBER(request, id):
     messages.success(request, 'Member successfully deleted')
     return redirect('viewall_member')
 
-def MEMBER_DETAIL(request, member_id):
-    # Retrieve the member instance or return a 404 if not found
-    member = get_object_or_404(CustomUser , id=member_id)
-
-    # Prepare the context with member information
+def MEMBER_DETAILS(request,id):
+    selected_member = Member.objects.filter(id = id)
+    member= Member.objects.get(id=id)
+    
     context = {
-        'first_name': member.first_name,
-        'last_name': member.last_name,
-        'middle_name': member.middle_name,
-        'email': member.email,
-        'contact_no': member.contact_no,
-        'birthdate': member.birthdate,
-        'membership_type': member.membership_type,
-        'member_type': member.member_type,
-        'salutation': member.salutation,
-        'position': member.position,
-        'facebook_profile_link': member.facebook_profile_link,
-        'payment_date': member.payment_date,
-        'terms_accepted': member.terms_accepted,
-        'profile_pic': member.profile_pic.url if member.profile_pic else None,
-        'proof_of_payment': member.proof_of_payment.url if member.proof_of_payment else None,
+        'member':member,
+        'selected_member':selected_member,
+        # 'municipality':municipality
+   
     }
-
-    # Render the member detail template with the context
-    return render(request, 'hoo/member_detail.html', context)
+    return render(request, 'hoo/member_details.html', context)

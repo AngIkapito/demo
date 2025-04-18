@@ -25,10 +25,8 @@
             
           <legend>For Access</legend>
          <div class="form-group">
-            <p style="color: red" hidden>Current id: {{ customuser.0.id }}</p>
+            <p style="color: red">Current Member/CustomUser ID: {{ member.admin.id }}</p>
              <input type="text" class="form-control" id="member_id" name="member_id" value= "{{ customuser.0.id }}" hidden required/>
-           
-             
              <label for="is_superuser">Is Superuser?</label>
              <select class="form-control" id="is_superuser" name="is_superuser" >
                 {% if customuser.0.is_superuser == 1 %}
@@ -80,13 +78,6 @@
                     <option value="2">2 - OFFICER</option>
                     <option value="3">3 - MEMBER</option>
                 {% endif %}
-            
-                {% comment %} {% if customuser.0.user_type == "1" %}
-                {% elif customuser.0.user_type == "2" %}
-                   
-                {% elif customuser.0.user_type == "3" %}
-                    
-                {% endif %} {% endcomment %}
             </select> 
 
   </fieldset>
@@ -95,29 +86,34 @@
           <legend>Member Information</legend>
             <div class="form-group">
                 <label for="membership_type">Membership Type</label>
-                {% comment %} <p style="color: red" hidden>Current Membership Type: {{ customuser.0.membership_type }}</p> {% endcomment %}
+                <p style="color: red">Current Membership Type: 
+                {% if member and member.membershiptype %}
+                    {{ member.membershiptype.membershiptype_name }}  <!-- Display the name of the current membership type -->
+                {% else %}
+                    None  <!-- Fallback message if no membership type is set -->
+                {% endif %} </p>
                 <select class="form-control" id="membership_type" name="membership_type" >
-                    {% if customuser.0.membership_type %}
-                        <option value="{{ customuser.0.membership_type }}" selected>{{ customuser.0.membership_type }}</option>  <!-- Current salutation as default -->
+                    {% if member and member.membertype %}
+                        <option value="{{ member.membertype.id }}" selected>{{ member.membertype.membershiptype_name }}</option>  <!-- Current membership type as default -->
                     {% else %}
-                        <option value="" disabled selected>Select Membership Type</option>  <!-- Default option if no salutation -->
+                        <option value="" disabled selected>Select Membership Type</option>  <!-- Default option if no member -->
                     {% endif %}
     
                     {% for membershiptype in membershiptypes %}
-                        {% if membershiptype.membershiptype_name != customuser.0.membership_type %}  <!-- Exclude the current salutation from the list -->
+                        {% if membershiptype.membershiptype_name %}  <!-- Exclude the current salutation from the list -->
                             <option value="{{ membershiptype.membershiptype_name }}">{{ membershiptype.membershiptype_name }}</option>
                         {% endif %}
                     {% endfor %}
                 </select>
 
 
-          <p style="color: red" hidden>Current Member Type: {{ customuser.0.member_type }}</p>
+          <p style="color: red">Current Member Type: {{ customuser.0.member_type }}</p>
           <label for="member_type">Member Type</label>
           <select class="form-control" id="member_type" name="member_type" >
                 {% if customuser.0.member_type %}
                     <option value="{{ customuser.0.member_type }}" selected>{{ customuser.0.member_type }}</option>  <!-- Current salutation as default -->
                 {% else %}
-                    <option value="" disabled selected>Select Membership Type</option>  <!-- Default option if no salutation -->
+                    <option value="" disabled selected>Select Member Type</option>  <!-- Default option if no salutation -->
                 {% endif %}
 
                 {% for membertype in membertypes %}
@@ -130,7 +126,7 @@
 
       <div class="form-group">
           <div class="form-group">
-            <p style="color: red" hidden>Current Salutation: {{ customuser.0.salutation }}</p>
+            <p style="color: red">Current Salutation: {{ customuser.0.salutation }}</p>
             <label for="salutation">Salutation</label>
             <select class="form-control" id="salutation" name="salutation" >
                 {% if customuser.0.salutation %}
@@ -171,6 +167,7 @@
        </div> 
 
        <div class="form-group">
+        <p style="color: red">Current Position: {{ customuser.0.position }}</p>
           <label for="position">Position</label>
           <input type="text" style="text-transform: uppercase;" class="form-control form-control-user" id="position"
               placeholder="Position" name="position" value= "{{customuser.0.position}}"/>
@@ -182,6 +179,7 @@
           </div>
 
           <div class="form-group">
+            <p style="color: red">Current Contact No: {{ member.contact_no }}</p>
           <label for="contact_no">Contact Number</label>
               <input type="text" class="form-control form-control-user" id="contact_no"
                   placeholder="Contact No. Ex. 09123456789" name="contact_no" maxlength="11" value= "{{customuser.0.contact_no}}" />

@@ -31,10 +31,13 @@ def EVENT(request):
 def LOGIN(request):
     return render(request,'login.html')
 
+def ERRORPAGE(request):
+    return render(request,'error_page.html')
+
 def REGISTRATION(request):
     if request.method == "POST":
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
+        first_name = request.POST.get('first_name').upper()
+        last_name = request.POST.get('last_name').upper()
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -45,27 +48,31 @@ def REGISTRATION(request):
             return redirect('registration')
 
         # Check if the username is already taken
-        if CustomUser.objects.filter(username=username).exists():
+        elif CustomUser .objects.filter(username=username).exists():
             messages.warning(request, 'Username is already taken')
             return redirect('registration')
-
-        # Create a new user if email and username are unique
-        user = CustomUser (
-            first_name=first_name,
-            last_name=last_name,
-            username=username,
-            email=email,
-            user_type=3,  # Adjust this based on your user type logic
-        )
-        user.set_password(password)  # Hash the password
-        user.save()  # Save the user to the database
-
-        # Prepare a success message with a login link
-        login_link = reverse('login')  # Assuming 'login' is the name of your login URL pattern
-        login_message = f'{user.first_name} {user.last_name} is successfully added. <a href="{login_link}">Click here to login.</a>'
-        messages.success(request, mark_safe(login_message))
-
-        return redirect('registration')  # Redirect to the registration page or another page
+        
+        else:
+            # Create a new user if email and username are unique
+            user = CustomUser (
+                first_name=first_name,
+                last_name=last_name,
+                username=username,
+                email=email,
+                user_type=3,  # Adjust this based on your user type logic
+            )
+            
+            user.set_password(password)  # Hash the password
+            user.save()  # Save the user to the database
+            # try:
+            #     user.save()  # Save the user to the database
+            #     # Prepare a success message with a login link
+            login_link = reverse('login')  # Assuming 'login' is the name of your login URL pattern
+            login_message = f'{user.first_name} {user.last_name} is successfully added. <a href="{login_link}">Click here to login.</a>'
+            messages.success(request, mark_safe(login_message))
+            # except Exception as e:
+            #     messages.error(request, 'An error occurred while creating your account. Please try again.')
+        return redirect('registration')
 
     return render(request, 'registration.html')  # Render the registration form if not a POST request
 
@@ -117,7 +124,7 @@ def REGISTRATION_BYPASS(request):
         if email and CustomUser.objects.filter(email=email).exists():
              messages.warning(request,'Email is already taken')
              return redirect('registration')
-        if CustomUser.objects.filter(username=username).exists():
+        elif CustomUser.objects.filter(username=username).exists():
              messages.warning(request,'Username is already taken')
              return redirect('registration')     
         else:
@@ -165,7 +172,6 @@ def REGISTRATION_BYPASS1(request):
         # terms_accepted = request.POST.get('terms_accepted')
         
         username = request.POST.get('username')
-        password = request.POST.get('password')
         password = request.POST.get('password')
                       
         if email and CustomUser.objects.filter(email=email).exists():

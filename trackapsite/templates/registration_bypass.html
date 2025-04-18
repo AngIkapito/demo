@@ -16,7 +16,10 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+<!-- Include Font Awesome 5 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Include Bootstrap CSS (optional) -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
 
@@ -34,64 +37,97 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
+                                {% include 'includes/messages.html' %}
                                 <h1 class="h4 text-gray-900 mb-4">Register as Member</h1>
                             </div>
 
                             <form class="user" method="post" action=" {% url "registration_bypass" %} " enctype="multipart/form-data" onsubmit="return validateForm()" >
                                {% csrf_token %}
-                               {% include 'includes/messages.html' %}
+                               
+                               
                                
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" style="text-transform: uppercase;" class="form-control form-control-user" id="first_name"
+                                        <label for="first_name">First Name</label>
+                                        <input type="text" class="form-control text-uppercase" id="firstname"
                                             placeholder="First Name" name="first_name" required/>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" style="text-transform: uppercase;" class="form-control form-control-user" id="last_name"
+                                        <label for="last_name">Last Name</label>
+                                        <input type="text" class="form-control text-uppercase"  id="lastname"
                                             placeholder="Last Name" name="last_name" required/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="email"
+                                    <label for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email"
                                         placeholder="Email Address" name="email" required/>
                                 </div>
 
-                                <div class="form-group">
+                                {% comment %} <div class="form-group">
                                     
                                     <input type="text" class="form-control form-control-user" id="contact_no"
                                         placeholder="Contact No. Ex. 09123456789" name="contact_no" maxlength="11" required/>
-                                </div>
+                                </div> {% endcomment %}
 
                                 <div class="form-group">
-                                    <input type="username" class="form-control form-control-user" id="exampleInputUsername"
+                                    <label for="username">Username</label>
+                                    <input type="username" class="form-control " id="username"
                                         placeholder="Username" name="username" required/>
                                 </div>
 
                                 <div class="form-group row">
+
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" name="password" required/>
+                                        <label for="password">Password</label>
+                                        <div class="input-group">
+                                        <input type="password" class="form-control"
+                                            id="password" placeholder="Password" name="password" required/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text toggle-password" 
+                                                    onclick="togglePasswordVisibility()" 
+                                                    data-toggle="tooltip" 
+                                                    title="Show/Hide Password">
+                                                    <i class="fa fa-eye" id="eye-icon"></i>
+                                                </span>
+                                            </div>
+                                            </div>
+                                        
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="repeatpassword" placeholder="Repeat Password" name="repeatpassword" required/>
-                                            <label id="passwordError" class="form-label text-danger d-none">Passwords do not match.</label>
-                                        </div>
+
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="repeatPassword">Repeat Password</label>
+                                        <div class="input-group">
+                                        <input type="password" class="form-control"
+                                            id="repeatPassword" placeholder="Password" name="repeatPassword" required/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text toggle-password" 
+                                                    onclick="togglerepeatPasswordVisibility()" 
+                                                    data-toggle="tooltip" 
+                                                    title="Show/Hide Password">
+                                                    <i class="fa fa-eye" id="eye-icon2"></i>
+                                                </span>
+                                            </div>
+                                            </div>
+                                        
+                                    </div>
+                                    
                                 </div>
-                                
-                                <div class="col-sm mb-3">
+                                <label id="passwordError" class="form-label text-danger d-none"></label><br>
+                                    <label id="repeatPasswordError" class="form-label text-danger d-none"></label>
+                                {% comment %} <div class="col-sm mb-3">
                                     <div class="form-group">
                                         <label>
                                             <input type="radio" name="membershipAgreement" value="accepted" required>
-                                            I accept the terms of membership.
-                                        </label>
+                                                I accept the terms of membership.
+                                            </label>
                                        
-                                    </div>
+                                        </div>
                                     <div class="agreement">
                                         If accepted for membership, I agree to comply with the requirements of the By-Laws, and all regulations adopted by the Society with full knowledge of the responsibility imposed upon me.
                                     </div>
-                                  </div>
+                                  </div> {% endcomment %}
 
                                 <button id="registerButton" class="btn btn-primary btn-user btn-block" type="submit">Register</button>
                                 {% comment "" %}
@@ -119,30 +155,85 @@
         </div>
 
     </div>
+
     <script>
         function validateForm() {
-            var checkbox = document.getElementById("termsCheckbox");
-            var password = document.getElementById("password").value;
-            var repeatPassword = document.getElementById("repeatpassword").value;
-            var passwordError = document.getElementById("passwordError");
-  
-            // Validate checkbox
-            if (!checkbox.checked) {
-                alert("You must agree to the terms of service before registering.");
-                return false;
-            }
-  
-            // Validate passwords
+            const password = document.getElementById('password').value;
+            const repeatPassword = document.getElementById('repeatPassword').value;
+        
+            // Clear previous error messages
+            document.getElementById('passwordError').innerText = '';
+            document.getElementById('repeatPasswordError').innerText = '';
+            document.getElementById('passwordError').classList.add('d-none');
+            document.getElementById('repeatPasswordError').classList.add('d-none');
+        
+            let isValid = true; // Flag to track overall validity
+        
+            // Check if passwords match
             if (password !== repeatPassword) {
-                passwordError.classList.remove("d-none");
-                return false;
-            } else {
-                passwordError.classList.add("d-none");
+                document.getElementById('repeatPasswordError').innerText = "Passwords do not match.";
+                document.getElementById('repeatPasswordError').classList.remove('d-none'); // Show the error
+                isValid = false; // Set validity to false
             }
-  
-            return true;
+        
+            // Password complexity requirements
+            const passwordRequirements = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        
+            // Check if password meets requirements
+            if (password.length < 8) {
+                document.getElementById('passwordError').innerText = "Password must be at least 8 characters long.";
+                document.getElementById('passwordError').classList.remove('d-none'); // Show the error
+                isValid = false; // Set validity to false
+            } else if (!passwordRequirements.test(password)) {
+                document.getElementById('passwordError').innerText = "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.";
+                document.getElementById('passwordError').classList.remove('d-none'); // Show the error
+                isValid = false; // Set validity to false
+            }
+
+            // If the form is valid, hide error messages
+            if (isValid) {
+                document.getElementById('passwordError').classList.add('d-none');
+                document.getElementById('repeatPasswordError').classList.add('d-none');
+            }
+
+            return isValid; // Allow or prevent form submission based on validity
         }
-    </script>
+    </script> 
+    {% comment %} Show or Hide password {% endcomment %}
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+
+        // Toggle the type attribute
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye'); // Corrected class name
+            eyeIcon.classList.add('fa-eye-slash'); // Corrected class name
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash'); // Corrected class name
+            eyeIcon.classList.add('fa-eye'); // Corrected class name
+        }
+    }
+</script>
+<script>
+    function togglerepeatPasswordVisibility() {
+        const passwordInput = document.getElementById('repeatPassword');
+        const eyeIcon2 = document.getElementById('eye-icon2');
+
+        // Toggle the type attribute
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text'; // Change to text to show password
+            eyeIcon2.classList.remove('fa-eye'); // Change to open eye
+            eyeIcon2.classList.add('fa-eye-slash'); // Change to closed eye
+        } else {
+            passwordInput.type = 'password'; // Change back to password to hide
+            eyeIcon2.classList.remove('fa-eye-slash'); // Change to closed eye
+            eyeIcon2.classList.add('fa-eye'); // Change to open eye
+        }
+    }
+</script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -152,7 +243,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <!-- Include Bootstrap JS (optional, if you're using Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

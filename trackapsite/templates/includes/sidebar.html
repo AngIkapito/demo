@@ -33,8 +33,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{% url "add_member" %}">Add Member</a>
-                <a class="collapse-item" href="">Approve Member</a>
+                <a class="collapse-item" href="">Approve Membership</a>
+                {% comment %} <a class="collapse-item" href="">Approve Member</a> {% endcomment %}
                 <a class="collapse-item" href="{% url "viewall_member" %}">Members List</a>
             </div>
         </div>
@@ -53,11 +53,6 @@
                 <a class="collapse-item" href="">Events List</a>
                 <a class="collapse-item" href="">Competition List</a>
                 {% comment %} <h6 class="collapse-header">Events</h6> {% endcomment %}
-                {% comment %} <a class="collapse-item" href="">Add Event</a> {% endcomment %}
-                {% comment %} <a class="collapse-item" href="">Events List</a> {% endcomment %}
-                {% comment %} <h6 class="collapse-header">Competitions</h6> {% endcomment %}
-                {% comment %} <a class="collapse-item" href="">Add Competition</a> {% endcomment %}
-                {% comment %} <a class="collapse-item" href="">Competitions List</a> {% endcomment %}
             </div>
         </div>
     </li>
@@ -78,7 +73,7 @@
 </li> {% endcomment %}
 
 <!-- School year Nav Item - Utilities Collapse Menu -->
-<li class="nav-item">
+{% comment %} <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCycle"
         aria-expanded="true" aria-controls="collapseCycle">
         <i class="fas fa-calendar"></i>
@@ -91,8 +86,25 @@
             <a class="collapse-item" href="{% url "view_schoolyear" %}">Cycle List</a>
         </div>
     </div>
+</li> {% endcomment %}
+<!-- Settings Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+        aria-expanded="true" aria-controls="collapseSettings">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+    </a>
+    <div id="collapseSettings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url "view_schoolyear" %}">Cycles</a>
+            <a class="collapse-item" href="">Regions / Chapters</a>
+            <a class="collapse-item" href="">Officer Types</a>
+            <a class="collapse-item" href="">Organizations / Schools</a>
+            <a class="collapse-item" href="">Membership Types</a>
+            <a class="collapse-item" href="">Member Types</a>
+        </div>
+    </div>
 </li>
-
  <!-- Divider -->
  <hr class="sidebar-divider my-0">
 
@@ -125,24 +137,6 @@
                 <a class="collapse-item" href="">Announcements</a>
                 <a class="collapse-item" href="">Events</a>
                 <a class="collapse-item" href="">About Us</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Settings Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
-            aria-expanded="true" aria-controls="collapseSettings">
-            <i class="fas fa-cog"></i>
-            <span>Settings</span>
-        </a>
-        <div id="collapseSettings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Region/Chapter</a>
-                <a class="collapse-item" href="">Organization/School</a>
-                <a class="collapse-item" href="">Cycle</a>
-                <a class="collapse-item" href="">Membership Type</a>
-                <a class="collapse-item" href="">Member Type</a>
             </div>
         </div>
     </li>

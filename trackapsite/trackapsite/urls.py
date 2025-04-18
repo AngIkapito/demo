@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .import views
 
 from .import views, hoo_views, member_views, officer_views
 
@@ -17,6 +16,7 @@ urlpatterns = [
     path('registration/', views.REGISTRATION, name='registration'),
     path('registration_bypass/', views.REGISTRATION_BYPASS, name='registration_bypass'),
     path('registration_bypass1/', views.REGISTRATION_BYPASS1, name='registration_bypass1'),
+    path('error/', views.ERRORPAGE, name='error_page'),  # Define the error page URL
     # path('forgot_password/', views.FORGOT_PASSWORD, name='forgot_password'),
 
     #Login
@@ -38,6 +38,7 @@ urlpatterns = [
     path('hoo/Member/Edit/<str:id>', hoo_views.EDIT_MEMBER, name='edit_member'),
     path('hoo/Member/Update', hoo_views.UPDATE_MEMBER, name='update_member'),
     path('hoo/Member/Delete/<str:id>', hoo_views.DELETE_MEMBER, name='delete_member'),
+    path('hoo/Member/View/MemberDetails/<str:id>', hoo_views.MEMBER_DETAILS, name='member_details'),
     
     #Add Schoolyear/Cycle
     path('hoo/SchoolYear/Add', hoo_views.ADD_SCHOOLYEAR, name='add_schoolyear'),
