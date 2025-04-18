@@ -19,3 +19,7 @@ admin.site.register(Region)
 admin.site.register(Announcement)
 admin.site.register(OfficerType)
 admin.site.register(Member)
+
+admin.site.site_header = "TracKaPSITE | Admin Login"
+admin.site.site_title = "TracKaPSITE | Administrator"
+admin.site.index_title = "Welcome to TracKaPSITE Admin Dashboard"
