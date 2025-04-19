@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from app.models import Announcement
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -16,7 +17,14 @@ admin.site.register(School_Year)
 admin.site.register(MemberType)
 admin.site.register(MembershipType)
 admin.site.register(Region)
-admin.site.register(Announcement)
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ['title', 'created_by','get_tags']
+    
+    def get_tags(self, obj):
+        return ", ".join(o for o in obj.tags.names())
+
 admin.site.register(OfficerType)
 admin.site.register(Member)
 

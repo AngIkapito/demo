@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 import datetime
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class CustomUser(AbstractUser):
@@ -55,6 +56,8 @@ class Announcement(models.Model):
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='announcements')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    tags = TaggableManager()
     
     def __str__(self):
         return self.title

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'taggit',
     'app',
 ]
 
@@ -155,3 +156,5 @@ AUTHENTICATION_BACKENDS = [
     #'app.backend.EmailBackEnd',  # Replace 'yourapp' with your actual app name
     'django.contrib.auth.backends.ModelBackend',  # Default backend
 ]
+
+TAGGIT_CASE_INSENSITIVE = True

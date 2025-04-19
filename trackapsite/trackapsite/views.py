@@ -2,10 +2,11 @@ from django.shortcuts import render,redirect, HttpResponse
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from app.models import CustomUser, School_Year, Salutation, MembershipType, MemberType
+from app.models import CustomUser, School_Year, Salutation, MembershipType, MemberType, Announcement
 from django.utils.safestring import mark_safe
 from django.urls import path, include, reverse
 from datetime import datetime
+from taggit.models import Tag
 
 # Create your views here.
 
@@ -23,7 +24,29 @@ def CONTACT(request):
     return render(request,'contact.html')
 
 def ANNOUNCEMENT(request):
-    return render(request,'announcement.html')
+    announcements = Announcement.objects.prefetch_related('tags').all()
+    tags = Tag.objects.all()
+    query = request.GET.get('tags')
+    
+    if query:
+        results = Tag.objects.filter(tags__name__icontains=query)  # Adjust based on your model's tag field
+    else:
+        results = Tag.objects.all()  # Show all items if no query
+    
+    # Get all announcements and order them by updated_at date, descending
+    announcements = Announcement.objects.all().order_by('-updated_at')
+    
+    # Get the latest announcement
+    latest_announcement = announcements.first()  # This will be the latest announcement
+    
+    context = {
+        'announcements': announcements, 
+        'tags': tags, 
+        'results': results, 
+        'latest_announcement': latest_announcement
+        }
+    return render(request,'announcement.html', context)
+
 
 def EVENT(request):
     return render(request,'event.html')
