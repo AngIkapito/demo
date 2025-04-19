@@ -10,6 +10,7 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
  .logo {
   width: 100%; /* Default to full width on larger screens */
   max-width: 300px; /* Set a maximum width for larger screens */

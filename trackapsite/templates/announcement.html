@@ -1,156 +1,176 @@
-{% comment %} {% block 'template' %} {% endcomment %}
- {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <title>TracKaPSITE</title>
-      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css">
-      {% comment %} <!-- Font Awesome icons (free version) - USED in FOOTER-->
-      <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-       {% endcomment %}
-      
-    </head>
+{% extends "base.html" %}
+{% block content %}
+<!-- DITO KA MAS START MAGLAGAY NG LAMAN NG BODY -->
 
-<br><br><br><br>
-{% comment "" %}{% endcomment %}
-<body id="page-top">
-  
-  <!-- Navigation-->
-  {% include "header.html" %}
-<!--AFTER NITO MAGLAGAY NG CONTENT-->
+<h2>Announcements</h2>
 
-
-        <div class="container my-5">
-          <h2 class="text-center mb-4">Birthday Celebrants</h2>
-          <div class="row">
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t39.30808-6/489061314_1223583399775496_580393728365802260_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFe8fNvr0A7xNcMhzzqGixfRSZGOtGxfoxFJkY60bF-jBh67xGDPk_IJcCaAnk8TXfLbHNkcSKBBbgXiDc9TjYt&_nc_ohc=_sQPpe9TtRcQ7kNvwHfFEJF&_nc_oc=AdnPasCIu2f90RBwrIA4tAbPm8YwCbsvu9e7YKIjI5WJRIzJNKVMHxA7kzixHcVnQ3A&_nc_zt=23&_nc_ht=scontent.fmnl4-6.fna&_nc_gid=ktKU3dWtpZegQiPiWSijjg&oh=00_AfEXJpoejfH-KeSzDdr15kEpvNzoso_6kSLpUQ8J0SMnBQ&oe=67FC8F46" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t39.30808-6/487378289_1218339536966549_2452255299434427949_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGArXv3avlwCWQ59KpTdhQfFQKyEiIle_UVArISIiV79aKE-9MgjUQKfwelHhnwYAjfST-JE5GkAl9HMK93jhRa&_nc_ohc=ZP3erpAf7MAQ7kNvwEisIgY&_nc_oc=AdmriZS5M7X4d12q-dL5z1xVtYj2HXiHjD1--Cr9JpksH5OmXHsJK-R3tW-NG28Ucto&_nc_zt=23&_nc_ht=scontent.fmnl4-6.fna&_nc_gid=LUde4aDEwzaDATa66ufgtw&oh=00_AfEkRitOrbYWuV2_V08AQGWj1sDvIKnrgjH78By047T5MQ&oe=67FC69C5" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t39.30808-6/481694996_1188251533308683_4165310341255974317_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFMmO7prjiLkYp5z9hYZu1ob2M0A0WqN5hvYzQDRao3mPaqfjgrwBFmQth_X2RQ057z56-BYu6kAlbzHirDghSm&_nc_ohc=zBVmRBhjz2sQ7kNvwGLUdYc&_nc_oc=AdmpmcCzrerV1F0-P_p4iGWXUu0t431Uc4OzxmxmRo5LSIkK12-ndYmxUArzQphVBD0&_nc_zt=23&_nc_ht=scontent.fmnl4-6.fna&_nc_gid=vFn2V3DZM5JGGdi01jolhw&oh=00_AfEplJzUrTjHkW2dFD-hKE1RMeX8eF2hNPcwaOeTSKns7Q&oe=67FC8E9B" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t39.30808-6/480842473_1181531900647313_2303798846565224004_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFCRcuwlwcuTyucwOuoxRCUcA2jWe7snshwDaNZ7uyeyHyyOhlmFBpAPzpjvKQKeedI4pbMUWxqn-oTPBTQqQXx&_nc_ohc=c0hOneN92AEQ7kNvwF72cIu&_nc_oc=AdkPYE8H3mI11ndwGFLkWR45UlZqAqgbUvfASDABygiJPLvjQiOxTV-pjQdJX7F_oh4&_nc_zt=23&_nc_ht=scontent.fmnl4-6.fna&_nc_gid=tdeGHdo6nuh7Yi2C-ycB7g&oh=00_AfFvHCkBXw13wDsm0l1aHjx7f8O6PtuqiC7RMB45fa8i4w&oe=67FC61B9" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-2.fna.fbcdn.net/v/t39.30808-6/476573707_1167777362022767_5643111856387290178_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH6wG1s5MYTn-lmmK1E3stCmQ6puab1aLaZDqm5pvVotjAubfbgTNA-JtiyjR9BzWqokJlYQA3Ij9of8-uyPnJF&_nc_ohc=2kTjPYxoq9IQ7kNvwGqn4hy&_nc_oc=AdnfZZqrOIyfBVyUj3cTz40qpTCl46UXIiIm42zWa-FWCasK5CehH-Ez5HAzdONp8Tk&_nc_zt=23&_nc_ht=scontent.fmnl4-2.fna&_nc_gid=5IUIxi6J5zPbl6fmm5lJPg&oh=00_AfG9BT5uN_hGtzfYbvq2JSWnEogZyKDjD2qVKedcwosafQ&oe=67FC890E" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-2.fna.fbcdn.net/v/t39.30808-6/470688138_1128105502656620_7708786670076278275_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeExlGHQ9UE4cnTMDMkTmv31vX_CuDWtlye9f8K4Na2XJ2rYGm6Jx4nH0fkZUSGcrzgi2UMBYnCO1IxQ9FcPvxXJ&_nc_ohc=_TyJL0t8wSYQ7kNvwFmtJSo&_nc_oc=Admfe6yozIBkyJzxho7mVhLnngyZenmQj74hkfhPR8X5PoOAKAI2VtiqsFGTzHuZFBM&_nc_zt=23&_nc_ht=scontent.fmnl4-2.fna&_nc_gid=fX7FyYPieGzH4Y_W-50aWw&oh=00_AfHdzF8Ydno7wCVOOUl3afhcvX58e2MqTj5C22uBWLCihw&oe=67FC7FA3" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="https://scontent.fmnl4-7.fna.fbcdn.net/v/t39.30808-6/464766912_1084512143682623_4128843893025035764_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEwcwoXnIck95x7QXiZ4vjPbJyscEpKzhlsnKxwSkrOGV4KljnQZMivlxjBBBagDztXr9_r2BJvvP6ZR7pZWCgw&_nc_ohc=_g3mLMH86ZgQ7kNvwGijZuU&_nc_oc=AdkTu7mKqqLP3Qy0ZhOVTgIEhvvc7k5PZTVsqMp6t9O-Kkk6ahYLAMMo90Tuo5kVO2k&_nc_zt=23&_nc_ht=scontent.fmnl4-7.fna&_nc_gid=d4Mug0tPPGYIKUlUrCTsdQ&oh=00_AfGlX7WBRGchbM7JHv2XD9yh7jobwZ0dP8JVOa4d1Lu4bg&oe=67FC6E0A" alt="John Doe" />
-                <div class="card-body">
-                  <h4 class="card-title">John Doe</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-
-
-            <!-- Card 1    no image -->
-            
-              <div class="card">
-                <div class="col-md">
-                <div class="card-body">
-                  <h4 class="card-title">Latest Announcements</h4>
-                  <p class="card-text">Some example text. John Doe is an architect and engineer.</p>
-                  <ul>
-                    <li><strong>Membership Drive 2023:</strong> We are excited to announce our annual membership drive! Join us from [start date] to [end date] and enjoy exclusive benefits. Sign up now!</li>
-                    <li><strong>Call for Papers:</strong> We invite all members to submit their research papers for our upcoming conference. The deadline for submission is [date]. For more details, please visit our Events page.</li>
-                    <li><strong>Webinar Series:</strong> Join our upcoming webinar series on [topic] starting on [date]. This is a great opportunity to learn from industry experts and enhance your skills. Register now!</li>
-                    <li><strong>Annual General Meeting:</strong> Our Annual General Meeting will be held on [date] at [location]. All members are encouraged to attend and participate in shaping the future of PSITE CL.</li>
-                </ul>
-                  <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-              </div>
-            </div>
-  
-    <br>
+<!--Start of Announcement Container-->
+<div class="announcement-container" style="width: 100%;">
+  {% for announcement in announcements %}
+  <div class="card announcement" style="margin: 10px;" 
+       data-tags="{{ announcement.tags.all|join:', ' }}" 
+       data-title="{{ announcement.title }}" 
+       data-description="{{ announcement.description }}" 
+       data-date="{{ announcement.updated_at|date:'F j, Y' }}" 
+       data-image="{{ announcement.image.url|default:'https://picsum.photos/1000/300' }}" 
+       data-toggle="modal" 
+       data-target="#announcementModal">
+      <img src="{{ announcement.image.url|default:'https://picsum.photos/1000/300' }}" class="card-img-top" alt="...">
+      <div class="card-body">
+          <h5 class="card-title"><b>{{ announcement.title }}</b></h5>
+          <p class="card-text">Info: <b>{{ announcement.description|truncatewords:3 }}</b>...</p>
+          <p class="card-text">Date Published: <b>{{ announcement.updated_at|date:"F j, Y" }}</b></p>
+          <p class="card-text">Tags: {% for tag in announcement.tags.all %}<i>#{{ tag }}&nbsp;</i>{% endfor %}</p>
+          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#announcementModal">See more...</a>
+      </div>
   </div>
-
-<!--ADD MORE CONTENTS HERE, DYNAMIC -->
-
- <br><br><br>
-   {% comment "CENTERED DIV" %}{% endcomment %}
+{% endfor %}
 </div>
-  {% comment "CENTERED DIV" %}{% endcomment %}
+<!--End of Announcement Container-->
 
-   <!-- Footer-->
-   {% include "footer.html" %}
-   <!-- Bootstrap core JS-->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-   <!-- Core theme JS-->
-   <script src="js/scripts.js"></script>
- </body>
- 
-{% comment %} {% endblock %} {% endcomment %}
+<!-- Error message element -->
+<div id="no-matches" style="display: none; margin-top: 20px; color: red;">
+    No announcements found for this tag.
+</div>
+
+
+<div class="tag-buttons text-center" style="padding-top: 30px;" aria-label="Basic example">
+  <i>Tags:</i>
+  {% for tag in tags %}
+  <button type="button" class="btn btn-secondary" data-tag="{{ tag }}">#{{ tag }}</button>
+  {% endfor %}
+  <button type="button" class="btn btn-secondary" id="show-all">Show All</button>
+  </a>
+</div>
+
+<!-- Modal for the latest announcement -->
+<div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="announcementModalLabel">{{ latest_announcement.title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="{{ latest_announcement.image.url|default:'https://picsum.photos/1000/300' }}" class="img-fluid" alt="...">
+        <h5 id="modalTitle">{{ latest_announcement.title }}</h5>
+        <p id="modalDescription">Info: <b>{{ latest_announcement.description }}</b></p>
+        <p id="modalDate">Date Published: <b>{{ latest_announcement.updated_at|date:"F j, Y" }}</b></p>
+        <p id="modalTags">Tags: {% for tag in latest_announcement.tags.all %}<i>#{{ tag }}&nbsp;</i>{% endfor %}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for announcement in announcements %}
+<!-- Modal for announcement card -->
+<div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="announcementModalLabel">{{ announcement.title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="{{ announcement.image.url|default:'https://picsum.photos/1000/300' }}" class="img-fluid" alt="...">
+        <h5 id="modalTitle">{{ announcement.title }}</h5>
+        <p id="modalDescription">Info: <b>{{ announcement.description|truncatewords:3 }}</p>
+        <p id="modalDate">Date Published: <b>{{ announcement.updated_at|date:"F j, Y" }}</p>
+        <p id="modalTags">Tags: {% for tag in announcement.tags.all %}<i>#{{ tag }}&nbsp;</i>{% endfor %}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+{% comment %} {% for announcement in announcements %}
+<!-- Modal for announcement card -->
+<div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="announcementModalLabel">{{ announcement.title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="{{ announcement.image.url|default:'https://picsum.photos/1000/300' }}" class="img-fluid" alt="...">
+        <h5 id="modalTitle">{{ announcement.title }}</h5>
+        <p id="modalDescription">Info: <b>{{ announcement.description }}</p>
+        <p id="modalDate">Date Published: <b>{{ announcement.updated_at|date:"F j, Y" }}</p>
+        <p id="modalTags">Tags: {% for tag in announcement.tags.all %}<i>#{{ tag }}&nbsp;</i>{% endfor %}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endcomment %}
+
+<script>
+  // JavaScript to filter announcements based on the clicked tag
+  document.querySelectorAll('.btn-secondary[data-tag]').forEach(button => {
+      button.addEventListener('click', function() {
+          const selectedTag = this.getAttribute('data-tag');
+          const announcements = document.querySelectorAll('.announcement');
+          let hasMatches = false; // Flag to check if there are any matches
+
+          announcements.forEach(announcement => {
+              const tags = announcement.getAttribute('data-tags').split(', ');
+              if (tags.includes(selectedTag)) {
+                  announcement.style.display = 'block'; // Show announcement
+                  hasMatches = true; // Set flag to true if there's a match
+              } else {
+                  announcement.style.display = 'none'; // Hide announcement
+              }
+          });
+
+          // Show or hide the no matches message
+          const noMatchesMessage = document.getElementById('no-matches');
+          if (hasMatches) {
+              noMatchesMessage.style.display = 'none'; // Hide message if there are matches
+          } else {
+              noMatchesMessage.style.display = 'block'; // Show message if no matches
+          }
+      });
+  });
+
+  // JavaScript to show all announcements
+  document.getElementById('show-all').addEventListener('click', function() {
+      const announcements = document.querySelectorAll('.announcement');
+      announcements.forEach(announcement => {
+          announcement.style.display = 'block'; // Show all announcements
+      });
+      
+      document.getElementById('no-matches').style.display = 'none'; // Hide no matches message
+       // Scroll to the top after showing all
+       
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $('.announcement .btn-primary').on('click', function() {
+      var card = $(this).closest('.announcement'); // Get the closest card
+      var title = card.data('title');
+      var description = card.data('description');
+      var date = card.data('date');
+      var image = card.data('image');
+      var tags = card.data('tags');
+
+      $('#modalTitle').text(title);
+      $('#modalDescription').text(description);
+      $('#modalDate').text('Date Published: ' + date);
+      $('#modalImage').attr('src', image);
+      
+      // Format tags
+      var tagsHtml = tags.split(', ').map(tag => `<i>#${tag}</i>`).join(' ');
+      $('#modalTags').html('Tags: ' + tagsHtml);
+    });
+  });
+</script>
+<!-- STOP HERE! -->
+{% endblock %}
