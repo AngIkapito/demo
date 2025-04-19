@@ -42,3 +42,13 @@ This is for password guide
 
 
 https://swapy.tahazsh.com/ - Meet Swapy, a framework-agnostic tool that converts any layout into a drag-to-swap one with just a few lines of code.
+
+https://pypi.org/project/django-taggit/ - django-taggit is a reusable Django application for simple tagging.
+
+https://tw-elements.com/docs/standard/integrations/django-integration/ - tailwind in django
+
+https://flowbite.com/docs/getting-started/django/ - flowbite in django
+
+https://getbootstrap.com/docs/5.3/getting-started/introduction/ - bootstrap 5
+
+https://dev.to/madza/15-useful-placeholder-tools-for-designers-and-developers-4m7n - placeholders for developers
