@@ -52,3 +52,5 @@ https://flowbite.com/docs/getting-started/django/ - flowbite in django
 https://getbootstrap.com/docs/5.3/getting-started/introduction/ - bootstrap 5
 
 https://dev.to/madza/15-useful-placeholder-tools-for-designers-and-developers-4m7n - placeholders for developers
+
+https://onecompiler.com/ - Online compiler for HTML CSS JS - IDE
