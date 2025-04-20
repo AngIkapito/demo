@@ -41,6 +41,7 @@ class Organization(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='org_logo/')
+    telephone = models.CharField(max_length=15, blank=True, null=True)  # New telephone field
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='organizations')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -75,7 +76,6 @@ class School_Year(models.Model):
 class MemberType(models.Model):
     name = models.CharField(max_length=100)
     info = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='membertypes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -86,6 +86,7 @@ class MemberType(models.Model):
 class MembershipType(models.Model):
     name = models.CharField(max_length=100)
     info = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='membershiptypes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

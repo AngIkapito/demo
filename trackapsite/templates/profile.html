@@ -1,4 +1,5 @@
 {% extends 'includes/base.html' %}
+{% load static %}
 {% block content %}
 
 <div class="row">
@@ -11,34 +12,20 @@
                       <h5 class="form-title"><span>Profile Update</span></h5>
                    </div>
 
-                   {% for message in messages %}
-                   {% if message.tags == 'error' %}
-                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                      <strong> {{message}}.</strong> 
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                   {% include 'includes/messages.html' %}
+
+                     <div class="col-sm-11">
+                        <div class="form-group">
+                            <label>Profile Picture</label>
+                            <input type="file" class="form-control" name="profile_pic" id="profilePicInput" accept="image/*" onchange="previewImage(event)">
+                            <div class="image-preview text-center" id="imagePreview" style="display: block;">
+
+                              <img id="preview" src="{% static "img/default-profile.png" %}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
+                          </div>
+                           </div>
+                        
                     </div>
-                    {% endif %}
-                    {% empty %}
-                    
-                    {% endfor %}
 
-                    {% for message in messages %}
-                    {% if message.tags == 'success' %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                       <strong> {{message}}.</strong> 
-                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                     </div>
-                     {% endif %}
-                     {% empty %}
-                     
-                     {% endfor %}
-
-                   <div class="col-sm-11">
-                      <div class="form-group">
-                         <label>Profile Picture</label>
-                         <input type="file" class="form-control" name="profile_pic">
-                      </div>
-                   </div>
                    <div class="col-sm-11">
                       <div class="form-group">
                          <label>Firstname</label>
@@ -73,9 +60,30 @@
                       <button type="submit" class="btn btn-primary">Update Profile</button>
                    </div>
              </form>
+
+             
+            </div>
           </div>
        </div>
     </div>
  </div>
+ <script>
+   function previewImage(event) {
+       const input = event.target;
+       const preview = document.getElementById('preview');
+       const imagePreviewContainer = document.getElementById('imagePreview');
 
+       if (input.files && input.files[0]) {
+           const reader = new FileReader();
+
+           reader.onload = function(e) {
+               preview.src = e.target.result;
+           }
+
+           reader.readAsDataURL(input.files[0]); // Convert the file to a data URL
+       } else {
+           preview.src = "path/to/placeholder-image.jpg"; // Reset to placeholder if no file is selected
+       }
+   }
+</script>
 {% endblock %}

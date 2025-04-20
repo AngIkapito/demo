@@ -65,11 +65,15 @@
                         </select>
 
                             <div class="form-group">
-                                <label for="membershiptype_id">Membership Type</label>
+                                <label for="membershiptype_id">Membership Type
+                                    <i class="fas fa-info-circle" 
+                                    data-toggle="tooltip" 
+                                    title="Select your membership type. Each type has different benefits and pricing."></i>
+                                </label>
                                 <select class="form-control" id="membershiptype_id" name="membershiptype_id" required/>
                                     <option value="" disabled selected>SELECT MEMBERSHIP TYPE</option>  <!-- Default option if no membership type is selected -->
                                     {% for membershiptype in membershiptypes %}
-                                        <option value="{{ membershiptype.id }}">{{ membershiptype.name }}</option>
+                                        <option value="{{ membershiptype.id }}">{{ membershiptype.name }} - {{membershiptype.price}} PESOS</option>
                                     {% endfor %}
                                 </select>
 
@@ -165,7 +169,11 @@
                         <legend>Login Information</legend>
 
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username">Username
+                                <i class="fas fa-info-circle" 
+                                    data-toggle="tooltip" 
+                                    title="You cannot change this after creating this Member Account"></i>
+                            </label>
                             <input type="text" class="form-control text-lowercase" id="username" placeholder="Username" name="username" required/>
                         </div>
                     
@@ -230,7 +238,7 @@
      
          // Validate checkbox
          if (!checkbox.checked) {
-             notificationArea.innerHTML += "You must agree to the terms of service before registering.<br>";
+             notificationArea.innerHTML += "You must agree to the terms of service before being creating your TracKaPSITE account.<br>";
              notificationArea.classList.remove('d-none');
              return false;
          }

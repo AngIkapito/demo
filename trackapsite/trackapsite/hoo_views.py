@@ -206,27 +206,12 @@ def EDIT_MEMBER(request, id):
     officertypes = OfficerType.objects.all()
     organizations = Organization.objects.all()
     
-    # Attempt to retrieve the Member object
-    # try:
-    # member = Member.objects.get(id=id)
     member = get_object_or_404(Member, id=id)
-    # except Member.DoesNotExist:
-    #     return redirect('error_page')  # Redirect to an error page if the member does not exist
 
-    # Retrieve the associated CustomUser  (admin)
-    selected_user = member.admin  # Assuming 'admin' is a ForeignKey to CustomUser 
-
-    # Retrieve other necessary data
-    if request.method == 'POST':
-        form = Member(request.POST, instance=member)
-        if form.is_valid():
-            form.save()  # Save the updated member
-            return redirect('success_page')  # Redirect to a success page or member detail page
-    else:
-        form = Member(instance=member)  # Pre-fill the form with the current member data
+    # selected_user =   # Assuming 'admin' is a ForeignKey to CustomUser 
     
     context = {
-        'selected_user': selected_user,  # Pass the selected user to the template
+        # 'selected_user': selected_user,  # Pass the selected user to the template
         'member': member,
         'salutations': salutations,  # Pass the salutations to the template
         'membershiptypes': membershiptypes,

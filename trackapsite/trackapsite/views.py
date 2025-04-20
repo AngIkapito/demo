@@ -273,7 +273,7 @@ def PROFILE_UPDATE(request):
                 customuser.profile_pic = profile_pic
 
             customuser.save()
-            messages.success(request,'Your Profile updated successfully! You will be redirected to Login page')
+            messages.success(request,'Your Profile updated successfully!')
             return redirect('profile')
         except:
             messages.error(request, 'Failed to update your profile')

@@ -8,11 +8,10 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <!-- Topbar Search -->
+                    {% comment %} <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" id="search-bar" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -20,7 +19,8 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                        <div id="suggestions" class="suggestions" style="display: none; position: absolute; z-index: 1000; background: white; border: 1px solid #ccc; max-height: 150px; overflow-y: auto;"></div>
+                    </form> {% endcomment %}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -167,7 +167,7 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href=" {% url "profile" %} ">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    <b>{{ user.first_name }} {{ user.last_name }}</b>
+                                    Profile Update
                                 </a>
                                 {% comment %} <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
