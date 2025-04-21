@@ -49,20 +49,6 @@ class Organization(models.Model):
     def __str__(self):
         return self.name
     
-class Announcement(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()  # Changed to TextField for longer descriptions
-    banner = models.ImageField(upload_to='announcement/')  # Simplified upload path
-    status = models.BooleanField(default=True)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='announcements')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    tags = TaggableManager()
-    
-    def __str__(self):
-        return self.title
-    
 class School_Year(models.Model):
     sy_start = models.DateField()
     sy_end = models.DateField()
@@ -132,4 +118,64 @@ class Member(models.Model):
     def __str__(self):
         return self.admin.first_name + " " + self.admin.last_name
     
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    theme = models.TextField()  # The theme of the event
+    date = models.DateTimeField()
+    location = models.CharField(max_length=255)
+    created_by = models.ForeignKey(CustomUser , on_delete=models.CASCADE, related_name='events')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    max_attendees = models.PositiveIntegerField(default=0)
+    registration_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    chair = models.ForeignKey(CustomUser , on_delete=models.CASCADE, related_name='chair_events', limit_choices_to={'user_type': 2})
+    co_chair = models.ForeignKey(CustomUser , on_delete=models.CASCADE, related_name='co_chair_events', limit_choices_to={'user_type': 2})
+    registration_link = models.URLField(blank=True, null=True)
+    qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
+    evaluation_link = models.URLField(blank=True, null=True)
+
+    def create_announcement(self, title, description, banner=None):
+        """Create an announcement for this event."""
+        announcement = Announcement.objects.create(
+            title=title,
+            description=description,
+            banner=banner,  # Include the banner if provided
+            created_by=self.created_by,  # Set the creator of the announcement to the event creator
+            event=self  # Link the announcement to this event
+        )
+        return announcement
+
+    def __str__(self):
+        return self.title
+    
+class Announcement(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()  # Changed to TextField for longer descriptions
+    banner = models.ImageField(upload_to='announcement/')  # Simplified upload path
+    status = models.BooleanField(default=True)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='announcements')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='announcements', null=True, blank=True)  # Link to Event
+    tags = TaggableManager()
+    
+    def __str__(self):
+        return self.title
+    
+# class EventRegistration(models.Model):
+#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='event_registrations')
+#     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='registrations')
+#     registration_date = models.DateTimeField(auto_now_add=True)
+#     status = models.CharField(max_length=20, choices=[('REGISTERED', 'REGISTERED'), ('CANCELLED', 'CANCELLED')], default='REGISTERED')
+#     registration_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  # New field for registration fee
+
+#     def __str__(self):
+#         return f"{self.user.username} - {self.event.title} ({self.status})"
+    
+
+    
+  
+
+
     
