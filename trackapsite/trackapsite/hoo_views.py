@@ -544,3 +544,75 @@ def UPDATE_MEMBERTYPE(request):
         messages.success(request, "MemberType successfully updated")
         return redirect('view_membertype')
     return render(request, 'hoo/edit_membertype.html')
+
+#For Organization Modules
+def VIEW_ORGANIZATION(request):
+    organization = Organization.objects.all()
+    
+    context = {
+        'organization':organization,
+    }
+    # print(teacher)
+    return render(request, 'hoo/view_organization.html', context)
+
+def ADD_ORGANIZATION(request):
+    if request.method == "POST":
+        organization_initials = request.POST.get('organization_initials')
+        organization_name = request.POST.get('organization_name')
+        organization_type = request.POST.get('organization_type')
+        organization_logo = request.POST.get('organization_logo')
+        organization_telno = request.POST.get('organization_telno')
+        # print(program_name)
+        
+        organization = Organization (
+            initials = organization_initials,
+            name = organization_name,
+            type = organization_type,
+            logo = organization_logo,
+            telephone = organization_telno,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
+        )
+        organization.save()
+        messages.success(request, 'Organization successfully added!')
+        return redirect('view_organization')
+    return render(request, 'hoo/add_organization.html')
+
+def DELETE_ORGANIZATION(request, id):
+    organization = Organization.objects.get(id = id)
+    organization.delete()
+    messages.success(request, 'Organization successfully deleted')
+    return redirect('view_organization')
+
+def EDIT_ORGANIZATION(request, id):
+    organization = Organization.objects.filter(id = id)
+    organizations = Organization.objects.all()
+    
+    context = {
+        'organization':organization,
+        'organizations':organizations,
+    }
+    
+    return render(request,'hoo/edit_organization.html', context)
+
+def UPDATE_ORGANIZATION(request):
+    if request.method == "POST":
+        id = request.POST.get('organization_id')
+        organization_initials = request.POST.get('organization_initials')
+        organization_name = request.POST.get('organization_name')
+        organization_type = request.POST.get('organization_type')
+        organization_logo = request.POST.get('organization_logo')
+        organization_telno = request.POST.get('organization_telno')
+        # print(program)
+        
+        organization = Organization.objects.get(id = id)
+        organization.initials = organization_initials
+        organization.name = organization_name
+        organization.type = organization_type
+        organization.logo = organization_logo
+        organization.telephone = organization_telno
+        
+        organization.save()
+        
+        messages.success(request, "Organization successfully updated")
+        return redirect('view_organization')
+    return render(request, 'hoo/edit_organization.html')

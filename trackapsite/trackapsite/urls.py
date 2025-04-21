@@ -75,6 +75,13 @@ urlpatterns = [
     path('hoo/MemberType/Update', hoo_views.UPDATE_MEMBERTYPE, name='update_membertype'),
     path('hoo/MemberType/Delete/<str:id>', hoo_views.DELETE_MEMBERTYPE, name='delete_membertype'),
     
+    #Add Organization
+    path('hoo/Organization/Add', hoo_views.ADD_ORGANIZATION, name='add_organization'),
+    path('hoo/Organization/View', hoo_views.VIEW_ORGANIZATION, name='view_organization'),
+    path('hoo/Organization/Edit/<str:id>', hoo_views.EDIT_ORGANIZATION, name='edit_organization'),
+    path('hoo/Organization/Update', hoo_views.UPDATE_ORGANIZATION, name='update_organization'),
+    path('hoo/Organization/Delete/<str:id>', hoo_views.DELETE_ORGANIZATION, name='delete_organization'),
+    
     #Add Salutation
     # path('hoo/Salutation/Add', hoo_views.ADD_SALUTATION, name='add_salutation'),
     # path('hoo/Salutation/View', hoo_views.VIEW_SALUTATION, name='view_salutation'),
