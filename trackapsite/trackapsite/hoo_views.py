@@ -485,3 +485,62 @@ def UPDATE_MEMBERSHIPTYPE(request):
         messages.success(request, "MembershipType successfully updated")
         return redirect('view_membershiptype')
     return render(request, 'hoo/edit_membershiptype.html')
+
+
+#For Membertype Modules
+def VIEW_MEMBERTYPE(request):
+    membertype = MemberType.objects.all()
+    
+    context = {
+        'membertype':membertype,
+    }
+    # print(teacher)
+    return render(request, 'hoo/view_membertype.html', context)
+
+def ADD_MEMBERTYPE(request):
+    if request.method == "POST":
+        membertype_name = request.POST.get('membertype_name')
+        membertype_info = request.POST.get('membertype_info')
+        # print(program_name)
+        
+        membertype = MemberType (
+            name = membertype_name,
+            info = membertype_info,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
+        )
+        membertype.save()
+        messages.success(request, 'MemberType successfully added!')
+        return redirect('view_membertype')
+    return render(request, 'hoo/add_membertype.html')
+
+def DELETE_MEMBERTYPE(request, id):
+    membertype = MemberType.objects.get(id = id)
+    membertype.delete()
+    messages.success(request, 'MemberType successfully deleted')
+    return redirect('view_membertype')
+
+def EDIT_MEMBERTYPE(request, id):
+    membertype = MemberType.objects.filter(id = id)
+    
+    context = {
+        'membertype':membertype,
+    }
+    
+    return render(request,'hoo/edit_membertype.html', context)
+
+def UPDATE_MEMBERTYPE(request):
+    if request.method == "POST":
+        id = request.POST.get('membertype_id')
+        membertype_name = request.POST.get('membertype_name')
+        membertype_info = request.POST.get('membertype_info')
+        # print(program)
+        
+        membertype = MemberType.objects.get(id = id)
+        membertype.name = membertype_name
+        membertype.info = membertype_info
+        
+        membertype.save()
+        
+        messages.success(request, "MemberType successfully updated")
+        return redirect('view_membertype')
+    return render(request, 'hoo/edit_membertype.html')

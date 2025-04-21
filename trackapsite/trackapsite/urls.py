@@ -69,11 +69,11 @@ urlpatterns = [
     path('hoo/MembershipType/Delete/<str:id>', hoo_views.DELETE_MEMBERSHIPTYPE, name='delete_membershiptype'),
     
     #Add MemberType
-    # path('hoo/MemberType/Add', hoo_views.ADD_MEMBERTYPE, name='add_membertype'),
-    # path('hoo/MemberType/View', hoo_views.VIEW_MEMBERTYPE, name='view_membertype'),
-    # path('hoo/MemberType/Edit/<str:id>', hoo_views.EDIT_MEMBERTYPE, name='edit_membertype'),
-    # path('hoo/MemberType/Update', hoo_views.UPDATE_MEMBERTYPE, name='update_membertype'),
-    # path('hoo/MemberType/Delete/<str:id>', hoo_views.DELETE_MEMBERTYPE, name='delete_membertype'),
+    path('hoo/MemberType/Add', hoo_views.ADD_MEMBERTYPE, name='add_membertype'),
+    path('hoo/MemberType/View', hoo_views.VIEW_MEMBERTYPE, name='view_membertype'),
+    path('hoo/MemberType/Edit/<str:id>', hoo_views.EDIT_MEMBERTYPE, name='edit_membertype'),
+    path('hoo/MemberType/Update', hoo_views.UPDATE_MEMBERTYPE, name='update_membertype'),
+    path('hoo/MemberType/Delete/<str:id>', hoo_views.DELETE_MEMBERTYPE, name='delete_membertype'),
     
     #Add Salutation
     # path('hoo/Salutation/Add', hoo_views.ADD_SALUTATION, name='add_salutation'),
