@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, HttpResponse, get_object_or_404
 from django.urls import path, include, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from app.models import CustomUser, School_Year, Salutation,Organization, MemberType, MembershipType, Member, OfficerType
+from app.models import CustomUser, School_Year, Salutation,Organization, MemberType, MembershipType, Member, OfficerType, Region
 from django.utils.safestring import mark_safe
 from django.utils import timezone
 from django.http import JsonResponse
@@ -307,3 +307,61 @@ def MEMBER_DETAILS(request,id):
    
     }
     return render(request, 'hoo/member_details.html', context)
+
+#For Region/Chapter Modules
+def VIEW_REGION(request):
+    region = Region.objects.all()
+    
+    context = {
+        'region':region,
+    }
+    # print(teacher)
+    return render(request, 'hoo/view_region.html', context)
+
+def ADD_REGION(request):
+    if request.method == "POST":
+        region_name = request.POST.get('region_name')
+        region_info = request.POST.get('region_info')
+        # print(program_name)
+        
+        region = Region (
+            name = region_name,
+            info = region_info,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
+        )
+        region.save()
+        messages.success(request, 'Region/Chapter successfully added!')
+        return redirect('add_region')
+    return render(request, 'hoo/add_region.html')
+
+def EDIT_REGION(request, id):
+    region = Region.objects.filter(id = id)
+    
+    context = {
+        'region':region,
+    }
+    
+    return render(request,'hoo/edit_region.html', context)
+
+def UPDATE_REGION(request):
+    if request.method == "POST":
+        id = request.POST.get('region_id')
+        region_name = request.POST.get('region_name')
+        region_info = request.POST.get('region_info')
+        # print(program)
+        
+        region = Region.objects.get(id = id)
+        region.name = region_name
+        region.info = region_info
+        
+        region.save()
+        
+        messages.success(request, "Region/Chapter successfully updated")
+        return redirect('view_region')
+    return render(request, 'hoo/edit_region.html')
+
+def DELETE_REGION(request, id):
+    region = Region.objects.get(id = id)
+    region.delete()
+    messages.success(request, 'Region/Chapter successfully deleted')
+    return redirect('view_region')

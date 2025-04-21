@@ -47,6 +47,13 @@ urlpatterns = [
     path('hoo/SchoolYear/Update', hoo_views.UPDATE_SCHOOLYEAR, name='update_schoolyear'),
     path('hoo/SchoolYear/Delete/<str:id>', hoo_views.DELETE_SCHOOLYEAR, name='delete_schoolyear'),
     
+    #Add Regions / Chapters
+    path('hoo/Region/Add', hoo_views.ADD_REGION, name='add_region'),
+    path('hoo/Region/View', hoo_views.VIEW_REGION, name='view_region'),
+    path('hoo/Region/Edit/<str:id>', hoo_views.EDIT_REGION, name='edit_region'),
+    path('hoo/Region/Update', hoo_views.UPDATE_REGION, name='update_region'),
+    path('hoo/Region/Delete/<str:id>', hoo_views.DELETE_REGION, name='delete_region'),
+    
     #Add MembershipType
     # path('hoo/MembershipType/Add', hoo_views.ADD_MEMBERSHIPTYPE, name='add_membershiptype'),
     # path('hoo/MembershipType/View', hoo_views.VIEW_MEMBERSHIPTYPE, name='view_membershiptype'),
