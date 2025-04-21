@@ -365,3 +365,123 @@ def DELETE_REGION(request, id):
     region.delete()
     messages.success(request, 'Region/Chapter successfully deleted')
     return redirect('view_region')
+
+#For Officertypes Modules
+def VIEW_OFFICERTYPE(request):
+    officertype = OfficerType.objects.all()
+    
+    context = {
+        'officertype':officertype,
+    }
+    # print(teacher)
+    return render(request, 'hoo/view_officertype.html', context)
+
+def ADD_OFFICERTYPE(request):
+    if request.method == "POST":
+        officertype_name = request.POST.get('officertype_name')
+        officertype_info = request.POST.get('officertype_info')
+        # print(program_name)
+        
+        officertype = OfficerType (
+            name = officertype_name,
+            info = officertype_info,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
+        )
+        officertype.save()
+        messages.success(request, 'OfficerType successfully added!')
+        return redirect('add_officertype')
+    return render(request, 'hoo/add_officertype.html')
+
+def DELETE_OFFICERTYPE(request, id):
+    officertype = OfficerType.objects.get(id = id)
+    officertype.delete()
+    messages.success(request, 'OfficerType successfully deleted')
+    return redirect('view_officertype')
+
+def EDIT_OFFICERTYPE(request, id):
+    officertype = OfficerType.objects.filter(id = id)
+    
+    context = {
+        'officertype':officertype,
+    }
+    
+    return render(request,'hoo/edit_officertype.html', context)
+
+def UPDATE_OFFICERTYPE(request):
+    if request.method == "POST":
+        id = request.POST.get('officertype_id')
+        officertype_name = request.POST.get('officertype_name')
+        officertype_info = request.POST.get('officertype_info')
+        # print(program)
+        
+        officertype = OfficerType.objects.get(id = id)
+        officertype.name = officertype_name
+        officertype.info = officertype_info
+        
+        officertype.save()
+        
+        messages.success(request, "OfficerType successfully updated")
+        return redirect('view_officertype')
+    return render(request, 'hoo/edit_officertype.html')
+
+#For Membership Modules
+def VIEW_MEMBERSHIPTYPE(request):
+    membershiptype = MembershipType.objects.all()
+    
+    context = {
+        'membershiptype':membershiptype,
+    }
+    # print(teacher)
+    return render(request, 'hoo/view_membershiptype.html', context)
+
+def ADD_MEMBERSHIPTYPE(request):
+    if request.method == "POST":
+        membershiptype_name = request.POST.get('membershiptype_name')
+        membershiptype_info = request.POST.get('membershiptype_info')
+        membershiptype_price = request.POST.get('membershiptype_price')
+        # print(program_name)
+        
+        membershiptype = MembershipType (
+            name = membershiptype_name,
+            info = membershiptype_info,
+            price = membershiptype_price,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
+        )
+        membershiptype.save()
+        messages.success(request, 'MembershipType successfully added!')
+        return redirect('view_membershiptype')
+    return render(request, 'hoo/add_membershiptype.html')
+
+def DELETE_MEMBERSHIPTYPE(request, id):
+    membershiptype = MembershipType.objects.get(id = id)
+    membershiptype.delete()
+    messages.success(request, 'MembershipType successfully deleted')
+    return redirect('view_membershiptype')
+
+def EDIT_MEMBERSHIPTYPE(request, id):
+    membershiptype = MembershipType.objects.filter(id = id)
+    
+    context = {
+        'membershiptype':membershiptype,
+    }
+    
+    return render(request,'hoo/edit_membershiptype.html', context)
+
+def UPDATE_MEMBERSHIPTYPE(request):
+    if request.method == "POST":
+        id = request.POST.get('membershiptype_id')
+        membershiptype_name = request.POST.get('membershiptype_name')
+        membershiptype_info = request.POST.get('membershiptype_info')
+        membershiptype_price = request.POST.get('membershiptype_price')
+        # print(program)
+        
+        membershiptype = MembershipType.objects.get(id = id)
+        membershiptype.name = membershiptype_name
+        membershiptype.info = membershiptype_info
+        membershiptype.price = membershiptype_price
+        
+        membershiptype.save()
+        
+        messages.success(request, "MembershipType successfully updated")
+        return redirect('view_membershiptype')
+    return render(request, 'hoo/edit_membershiptype.html')

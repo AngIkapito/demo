@@ -54,12 +54,19 @@ urlpatterns = [
     path('hoo/Region/Update', hoo_views.UPDATE_REGION, name='update_region'),
     path('hoo/Region/Delete/<str:id>', hoo_views.DELETE_REGION, name='delete_region'),
     
+    #Add OfficerType
+    path('hoo/OfficerType/Add', hoo_views.ADD_OFFICERTYPE, name='add_officertype'),
+    path('hoo/OfficerType/View', hoo_views.VIEW_OFFICERTYPE, name='view_officertype'),
+    path('hoo/OfficerType/Edit/<str:id>', hoo_views.EDIT_OFFICERTYPE, name='edit_officertype'),
+    path('hoo/OfficerType/Update', hoo_views.UPDATE_OFFICERTYPE, name='update_officertype'),
+    path('hoo/OfficerType/Delete/<str:id>', hoo_views.DELETE_OFFICERTYPE, name='delete_officertype'),
+    
     #Add MembershipType
-    # path('hoo/MembershipType/Add', hoo_views.ADD_MEMBERSHIPTYPE, name='add_membershiptype'),
-    # path('hoo/MembershipType/View', hoo_views.VIEW_MEMBERSHIPTYPE, name='view_membershiptype'),
-    # path('hoo/MembershipType/Edit/<str:id>', hoo_views.EDIT_MEMBERSHIPTYPE, name='edit_membershiptype'),
-    # path('hoo/MembershipType/Update', hoo_views.UPDATE_MEMBERSHIPTYPE, name='update_membershiptype'),
-    # path('hoo/MembershipType/Delete/<str:id>', hoo_views.DELETE_MEMBERSHIPTYPE, name='delete_membershiptype'),
+    path('hoo/MembershipType/Add', hoo_views.ADD_MEMBERSHIPTYPE, name='add_membershiptype'),
+    path('hoo/MembershipType/View', hoo_views.VIEW_MEMBERSHIPTYPE, name='view_membershiptype'),
+    path('hoo/MembershipType/Edit/<str:id>', hoo_views.EDIT_MEMBERSHIPTYPE, name='edit_membershiptype'),
+    path('hoo/MembershipType/Update', hoo_views.UPDATE_MEMBERSHIPTYPE, name='update_membershiptype'),
+    path('hoo/MembershipType/Delete/<str:id>', hoo_views.DELETE_MEMBERSHIPTYPE, name='delete_membershiptype'),
     
     #Add MemberType
     # path('hoo/MemberType/Add', hoo_views.ADD_MEMBERTYPE, name='add_membertype'),
