@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, HttpResponse, get_object_or_404
 from django.urls import path, include, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from app.models import CustomUser, School_Year, Salutation,Organization, MemberType, MembershipType, Member, OfficerType, Region
+from app.models import CustomUser, School_Year,Announcement, Salutation,Organization, MemberType, MembershipType, Member, OfficerType, Region
 from django.utils.safestring import mark_safe
 from django.utils import timezone
 from django.http import JsonResponse
@@ -560,7 +560,7 @@ def ADD_ORGANIZATION(request):
         organization_initials = request.POST.get('organization_initials')
         organization_name = request.POST.get('organization_name')
         organization_type = request.POST.get('organization_type')
-        organization_logo = request.POST.get('organization_logo')
+        # organization_logo = request.FILES.get('organization_logo')
         organization_telno = request.POST.get('organization_telno')
         # print(program_name)
         
@@ -568,7 +568,7 @@ def ADD_ORGANIZATION(request):
             initials = organization_initials,
             name = organization_name,
             type = organization_type,
-            logo = organization_logo,
+            # logo = organization_logo,
             telephone = organization_telno,
             created_by_id=request.user.id  # Set the created_by_username to the current user
         )
@@ -600,7 +600,7 @@ def UPDATE_ORGANIZATION(request):
         organization_initials = request.POST.get('organization_initials')
         organization_name = request.POST.get('organization_name')
         organization_type = request.POST.get('organization_type')
-        organization_logo = request.POST.get('organization_logo')
+        # organization_logo = request.FILES.get('organization_logo')
         organization_telno = request.POST.get('organization_telno')
         # print(program)
         
@@ -608,7 +608,7 @@ def UPDATE_ORGANIZATION(request):
         organization.initials = organization_initials
         organization.name = organization_name
         organization.type = organization_type
-        organization.logo = organization_logo
+        # organization.logo = organization_logo
         organization.telephone = organization_telno
         
         organization.save()
@@ -616,3 +616,79 @@ def UPDATE_ORGANIZATION(request):
         messages.success(request, "Organization successfully updated")
         return redirect('view_organization')
     return render(request, 'hoo/edit_organization.html')
+
+#For Announcement Modules
+def VIEW_ANNOUNCEMENT(request):
+    announcements = Announcement.objects.all()
+    
+    context = {
+        'announcements':announcements,
+    }
+    # print(teacher)
+    return render(request, 'hoo/view_announcement.html', context)
+
+def ADD_ANNOUNCEMENT(request):
+    if request.method == "POST":
+        announcement_title = request.POST.get('announcement_title')
+        announcement_description = request.POST.get('announcement_description')
+        announcement_banner = request.FILES.get('announcement_banner')
+        announcement_status = request.POST.get('announcement_status')
+        # print(program_name)
+        
+        announcement = Announcement (
+            title = announcement_title,
+            description = announcement_description,
+            banner = announcement_banner,
+            status = announcement_status,
+            created_by_id=request.user.id  # Set the created_by_username to the current user
+        )
+        announcement.save()
+        messages.success(request, 'Announcement successfully added!')
+        return redirect('view_announcement')
+    return render(request, 'hoo/add_announcement.html')
+
+def DELETE_ANNOUNCEMENT(request, id):
+    announcement = Announcement.objects.get(id = id)
+    announcement.delete()
+    messages.success(request, 'Announcement successfully deleted')
+    return redirect('view_announcement')
+
+def EDIT_ANNOUNCEMENT(request, id):
+    announcement = Announcement.objects.filter(id = id)
+    announcements = Announcement.objects.all()
+    
+    context = {
+        'announcement':announcement,
+        'announcements':announcements,
+    }
+    
+    return render(request,'hoo/edit_announcement.html', context)
+
+def UPDATE_ANNOUNCEMENT(request):
+    if request.method == "POST":
+        id = request.POST.get('announcement_id')
+        announcement_title = request.POST.get('announcement_title')
+        announcement_description = request.POST.get('announcement_description')
+        announcement_banner = request.FILES.get('announcement_banner')
+        announcement_status = request.POST.get('announcement_status')
+        # print(program)
+        # Convert the string value to a boolean
+       
+        announcement = Announcement.objects.get(id = id)
+        announcement.title = announcement_title
+        announcement.description = announcement_description
+        # announcement.banner = announcement_banner,
+        if announcement_status == '1':
+            announcement.status = True
+        elif announcement_status == '0':
+            announcement.status = False
+        else:
+            # Handle case where no valid status is provided
+            announcement.status = None  # or keep it unchanged
+        # announcement.status = announcement_status,
+        
+        announcement.save()
+        
+        messages.success(request, "Announcement successfully updated")
+        return redirect('view_announcement')
+    return render(request, 'hoo/edit_announcement.html')

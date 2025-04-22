@@ -1,6 +1,7 @@
 
 
 
+
 <!-- Remove the container if you want to extend the Footer to full width. -->
 <footer class="text-center text-white" style="background-color:#43a1ff;">
     <!-- Grid container -->
@@ -47,8 +48,8 @@
   </footer>
     
   <!--ITO YUNG BUTTON NA NICCLICK PARA MAGSCROL ULIT PATAAS-->
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/sb-admin-2.css' %}">
+{% comment %} {% load static %} {% endcomment %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/sb-admin-2.css' %}"> {% endcomment %}
 
 <a class="scroll-to-top rounded primary" href="#page-top" style="display: inline;">
   <i class="fas fa-angle-up">
@@ -72,6 +73,8 @@
     });
 </script>
 
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -83,8 +86,6 @@
     <script src="js/sb-admin-2.min.js"></script>
    <!-- Bootstrap core JS-->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-   <!-- Core theme JS-->
-   <script src="js/scripts.js"></script>
 
    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
  <!-- Bootstrap core JS-->

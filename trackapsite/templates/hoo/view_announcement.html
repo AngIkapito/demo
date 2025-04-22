@@ -15,10 +15,10 @@
             <a href="{% url 'hoo_home' %}" class="btn btn-secondary" title="Go Back">
                <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back</a>
 
-           <h1 class="h3 mb-0 text-gray-800">OfficerType List</h1>
+           <h1 class="h3 mb-0 text-gray-800">Announcement List</h1>
 
-           <a href="{% url 'add_officertype' %}" class="btn btn-primary" title="Add OfficerType">
-               <i class="fas fa-plus"></i>&nbsp;&nbsp;OfficerType
+           <a href="{% url 'add_announcement' %}" class="btn btn-primary" title="Add Announcement">
+               <i class="fas fa-plus"></i>&nbsp;&nbsp;Announcement
            </a> 
          
              {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -30,9 +30,10 @@
            <table class="table text-center table-bordered" id="dataTable" width="100%" cellspacing="0" >
              <thead>
                 <tr>
-                   <th>OfficerType</th>
-                   <th>Information</th>
-                   <th>Created at</th>
+                   <th>Title</th>
+                   <th>Description</th>
+                   <th>Banner</th>
+                   <th>Status</th>
                    <th>Updated at</th>
                    <th>Created by</th>
                    <th class=" text-center">Action</th>
@@ -40,29 +41,41 @@
              </thead>
              <tfoot>
                <tr>
-                  <th>OfficerType</th>
-                  <th>Information</th>
-                  <th>Created at</th>
-                  <th>Updated at</th>
-                  <th>Created by</th>
+                     <th>Title</th>
+                   <th>Description</th>
+                   <th>Banner</th>
+                   <th>Status</th>
+                   <th>Updated at</th>
+                   <th>Created by</th>
                   <th class=" text-center">Action</th>
                </tr>
             </tfoot>
              <tbody>
-               {% for i in officertype %}
+               {% for i in announcements %}
                 <tr>
                    {% comment %} <td>{{i.id}}</td> {% endcomment %}
-                   <td>{{i.name|upper}}</td>
-                   <td>{{i.info|upper}}</td>
-                   <td>{{i.created_at}}</td>
+                   <td>{{i.title|upper}}</td>
+                   <td>{{ i.description|upper|truncatewords:3 }}</td>
+                   <td>{% if announcement.0.banner.url %}
+                     <img src="{{ announcement.0.banner.url }}" alt="Banner Image" style="max-width: 100px; max-height: 100px;" enctype="multipart/form-data">
+                        {% else %}
+                     <p>No file associated</p>
+                        {% endif %}</td>
+                   <td><h5 hidden>{{ i.status }}</h5>
+                     <span id="toggle-icon" onclick="toggleAnnouncements()" style="cursor: pointer;">
+                         {% if i.status %}
+                             &#x1F7E2; &nbsp SHOW <!-- Green circle for ON -->
+                         {% else %}
+                             &#x1F534; &nbsp HIDE<!-- Red circle for OFF -->
+                         {% endif %}
+                     </span></td>
                    <td>{{i.updated_at}}</td>
                    <td>{{i.created_by.username}}</td>
                    <td class="text-right">
                       <div class="actions text-center">
-                         <a href="{% url 'edit_officertype' i.id %}" class="btn btn-sm bg-success-light" data-toggle="tooltip" data-placement="top" title="Edit">
+                         <a href="{% url 'edit_announcement' i.id %}" class="btn btn-sm bg-success-light" data-toggle="tooltip" data-placement="top" title="Edit">
                            <i class="fas fa-pen" style="font-size:20px"></i>
                        </a> 
-                        
                          <button class="btn btn-sm bg-danger-light delete-btn" data-id="{{i.id}}" data-toggle="tooltip" data-placement="top" title="Delete">
                            <i class="fas fa-trash" style="font-size:20px"></i>
                        </button>
@@ -88,7 +101,7 @@
       </button>
   </div>
   <div class="modal-body">
-      Are you sure you want to delete this OfficerType?
+      Are you sure you want to delete this Announcement?
   </div>
    <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -116,11 +129,17 @@ deleteButtons.forEach(function (button) {
 document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
   var programId = $('#confirmDeleteBtn').data('id');
   // Redirect to delete_program view with program ID
-  window.location.href = "{% url 'delete_officertype' 0 %}".replace("0", programId);
+  window.location.href = "{% url 'delete_announcement' 0 %}".replace("0", programId);
 });
 });
 </script>
-
+<script>
+   function toggleAnnouncements() {
+       // Logic to toggle the status
+       // This could involve an AJAX call to update the status in the backend
+       alert("Toggle status functionality not implemented.");
+   }
+</script>
 <script>
    $(document).ready(function() {
        $('#dataTable').DataTable({

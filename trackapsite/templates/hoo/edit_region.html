@@ -14,6 +14,7 @@
  <a href="{% url 'view_region' %}" class="btn btn-secondary" title="Go Back">
      <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
  </a>
+ 
  <div class="text-center flex-grow-1">
      <h1 class="h3 mb-0 text-gray-800">Edit Region/Chapter</h1>
  </div>
@@ -28,13 +29,13 @@
             <div class="col-sm-11">
                <label for="region_name">Region/Chapter Name</label>
                <input type="text" class="form-control" id="region_name"  name="region_name"
-                   placeholder="Enter Region/Chapter Name" value="{{region.0.name}}" />
+                   placeholder="Enter Region/Chapter Name" value="{{region.0.name}}" style="text-transform: uppercase;" />
              </div><br>
       
              <div class="col-sm-11">
                <label for="region_info">Region/Chapter</label>
                <input type="text" class="form-control " id="region_info"  name="region_info"
-                   placeholder="Enter Region/Chapter Information"  value="{{region.0.info}}" />
+                   placeholder="Enter Region/Chapter Information"  value="{{region.0.info}}" style="text-transform: uppercase;"/>
             </div>
         </div>
         <div class="col-12">

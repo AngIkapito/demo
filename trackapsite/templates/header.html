@@ -1,4 +1,4 @@
-{% load static %}
+
 {% load tz %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,61 +8,24 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <title>TracKaPSITE</title>
+      {% load static %}
       <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
       <link rel="icon" type="image/x-icon" href=" {% static "img/favicon.ico" %}" />
       <!-- Font Awesome icons (free version) - USED in FOOTER-->
       <!-- Google fonts-->
      <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
       <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-      <!-- Core theme CSS (includes Bootstrap)-->
-      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-      {% comment %} <!-- Font Awesome icons (free version) - USED in FOOTER-->
+      <!-- Core theme CSS (includes Bootstrap) -->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+      <!-- Font Awesome icons (free version) - USED in FOOTER-->
       <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-       {% endcomment %}
+    
 
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-       <style>
-        .announcement-container {
-            
-            display: flex; /* Use Flexbox for layout */
-            flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
-            justify-content: space-between; /* Space out the items */
-            margin: 20px 0; /* Optional: Add margin to the container */
-        }
-        
-        .card {
-            width: 100%; /* Make the card take the full width of the parent */
-            margin: 10px 0; /* Vertical margin between cards */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
-        }
-        
-        @media (max-width: 768px) {
-            .card {
-                flex: 1 1 calc(45% - 20px); /* Two cards per row on medium screens */
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .card {
-                flex: 1 1 100%; /* One card per row on small screens */
-            }
-        }
-        
-        .card-text {
-            line-height: 0.5; /* Adjust this value as needed */
-        }
-        .card-title {
-            line-height: 1.2; /* Adjust this value as needed */
-        }
-        
-        h1, h2 {
-            color: #0033a0; /* Blue */
-        }
-  
-    </style>
+    
     </head>
 <body id="page-top">
 
@@ -78,7 +41,6 @@
                         <li class="nav-item"><a class="nav-link" href=" {% url "event" %} ">Events</a></li>
                         <li class="nav-item"><a class="nav-link" href=" {% url "about" %} ">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href=" {% url "contact" %} ">Contact Us</a></li>
-                        {% comment "" %}<li class="nav-item"><a class="nav-link" href="{% url "registration" %}">Register</a></li>{% endcomment %}
                         <li class="nav-item"><a class="nav-link" href=" {% url "login" %} ">Log In</a></li>
                     </ul>
                 </div>

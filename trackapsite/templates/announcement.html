@@ -7,7 +7,7 @@
 <!--Start of Announcement Container-->
 <div class="announcement-container" style="width: 100%;">
   {% for announcement in announcements %}
-  <div class="card announcement" style="margin: 10px;" 
+  <div class="card announcement hover-card" style="margin: 10px;" 
        data-tags="{{ announcement.tags.all|join:', ' }}" 
        data-title="{{ announcement.title }}" 
        data-description="{{ announcement.description }}" 

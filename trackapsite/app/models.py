@@ -121,6 +121,7 @@ class Member(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=200)
     theme = models.TextField()  # The theme of the event
+    banner = models.ImageField(upload_to='eventbanner/', blank=True, null=True)  # New field for the event poster
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
     created_by = models.ForeignKey(CustomUser , on_delete=models.CASCADE, related_name='events')
@@ -134,16 +135,16 @@ class Event(models.Model):
     qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
     evaluation_link = models.URLField(blank=True, null=True)
 
-    def create_announcement(self, title, description, banner=None):
-        """Create an announcement for this event."""
-        announcement = Announcement.objects.create(
-            title=title,
-            description=description,
-            banner=banner,  # Include the banner if provided
-            created_by=self.created_by,  # Set the creator of the announcement to the event creator
-            event=self  # Link the announcement to this event
-        )
-        return announcement
+    # def create_announcement(self, title, description, banner=None):
+    #     """Create an announcement for this event."""
+    #     announcement = Announcement.objects.create(
+    #         title=title,
+    #         description=description,
+    #         banner=banner,  # Include the banner if provided
+    #         created_by=self.created_by,  # Set the creator of the announcement to the event creator
+    #         event=self  # Link the announcement to this event
+    #     )
+    #     return announcement
 
     def __str__(self):
         return self.title
@@ -151,7 +152,7 @@ class Event(models.Model):
 class Announcement(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()  # Changed to TextField for longer descriptions
-    banner = models.ImageField(upload_to='announcement/')  # Simplified upload path
+    banner = models.ImageField(upload_to='announcementbanner/')  # Simplified upload path
     status = models.BooleanField(default=True)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='announcements')
     created_at = models.DateTimeField(auto_now_add=True)

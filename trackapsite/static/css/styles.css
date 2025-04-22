@@ -4235,8 +4235,7 @@ textarea.form-control-lg {
 }
 
 .card:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s;
+  transform: scale(1.05) translateY(-10px); /* Scale up and move the card up by 10 pixels on hover */
 }
 
 .card {

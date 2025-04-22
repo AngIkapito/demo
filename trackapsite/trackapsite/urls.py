@@ -82,6 +82,13 @@ urlpatterns = [
     path('hoo/Organization/Update', hoo_views.UPDATE_ORGANIZATION, name='update_organization'),
     path('hoo/Organization/Delete/<str:id>', hoo_views.DELETE_ORGANIZATION, name='delete_organization'),
     
+     #Add Static Announcement
+    path('hoo/Announcement/Add', hoo_views.ADD_ANNOUNCEMENT, name='add_announcement'),
+    path('hoo/Announcement/View', hoo_views.VIEW_ANNOUNCEMENT, name='view_announcement'),
+    path('hoo/Announcement/Edit/<str:id>', hoo_views.EDIT_ANNOUNCEMENT, name='edit_announcement'),
+    path('hoo/Announcement/Update', hoo_views.UPDATE_ANNOUNCEMENT, name='update_announcement'),
+    path('hoo/Announcement/Delete/<str:id>', hoo_views.DELETE_ANNOUNCEMENT, name='delete_announcement'),
+    
     #Add Salutation
     # path('hoo/Salutation/Add', hoo_views.ADD_SALUTATION, name='add_salutation'),
     # path('hoo/Salutation/View', hoo_views.VIEW_SALUTATION, name='view_salutation'),

@@ -2,11 +2,7 @@
 {% load static %}
 {% block content %}
 <!-- DITO KA MAS START MAGLAGAY NG LAMAN NG BODY -->
-<div class="col-sm-12">
-   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-       <h1 class="h3 mb-0 text-gray-800">Edit Cycle</h1>
-   </div>
-</div>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 <!-- Page Heading -->
@@ -15,8 +11,16 @@
        <div class="card">
           <div class="card-body">
 <!-- DITO KA MAS START MAGLAGAY NG LAMAN NG BODY -->
-
-
+<div class="col-sm-12">
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <a href="{% url 'view_schoolyear' %}" class="btn btn-secondary" title="Go Back">
+        <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
+    </a>
+    
+    <div class="text-center flex-grow-1">
+        <h1 class="h3 mb-0 text-gray-800">Edit Cycle</h1>
+    </div>
+   </div>
 
 <form method="post" action="{% url 'update_schoolyear' %}" >
    {% csrf_token %}
@@ -45,8 +49,10 @@
 </div>
 </div>
 </div>
-
-<!-- /.container-fluid -->
 </div>
+</div>
+</div>
+</div>
+<!-- /.container-fluid -->
 {% endblock  %}
 

@@ -52,8 +52,8 @@
                {% for i in region %}
                 <tr>
                    {% comment %} <td>{{i.id}}</td> {% endcomment %}
-                   <td>{{i.name}}</td>
-                   <td>{{i.info}}</td>
+                   <td>{{i.name|upper}}</td>
+                   <td>{{i.info|upper}}</td>
                    <td>{{i.created_at}}</td>
                    <td>{{i.updated_at}}</td>
                    <td>{{i.created_by.username}}</td>
