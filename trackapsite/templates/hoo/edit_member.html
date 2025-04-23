@@ -119,8 +119,8 @@
                 {% endif %}
 
                 {% for membertype in membertypes %}
-                    {% if membertype.membertype_name != customuser.0.member_type %}  <!-- Exclude the current salutation from the list -->
-                        <option value="{{ membertype.membertype_name }}">{{ membertype.membertype_name }}</option>
+                    {% if membertype.name != member.membertype.name %}  <!-- Exclude the current salutation from the list -->
+                        <option value="{{ membertype.id }}">{{ membertype.name }}</option>
                     {% endif %}
                 {% endfor %}
             </select>
