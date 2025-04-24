@@ -42,9 +42,16 @@
                <label for="announcement_banner">Banner</label>
                <input type="file" class="form-control" id="announcement_banner" name="announcement_banner" accept="image/*" onchange="previewImage(event)" />
            </div>
+
            <div class="col-sm-11">
                <img id="image_preview" src="{{announcement.0.banner.url}}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;" />
            </div><br>
+
+           <div class="col-sm-11">
+        <label for="announcement_tags">Tags (comma-separated):</label>
+        <input type="text" id="announcement_tags" name="announcement_tags" 
+               value="{% for tag in announcement.0.tags.all %}{{ tag }},&nbsp;{% endfor %}"/>  
+           </div>
 
              <div class="col-sm-11">
                <label for="announcement_status">Publish it Now?</label>
@@ -94,5 +101,39 @@
        }
    }
 </script>
+
+<script>
+    function addTag(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+    
+            const input = document.getElementById('announcement_tags');
+            const tagValue = input.value.trim();
+    
+            if (tagValue) {
+                // Create a new tag element
+                const tagContainer = document.getElementById('tag_container');
+                const tagElement = document.createElement('span');
+                tagElement.className = 'tag';
+                tagElement.textContent = tagValue;
+    
+                // Create a remove button for the tag
+                const removeButton = document.createElement('span');
+                removeButton.className = 'remove-tag';
+                removeButton.textContent = 'x';
+                removeButton.onclick = function() {
+                    tagContainer.removeChild(tagElement);
+                };
+    
+                tagElement.appendChild(removeButton);
+                tagContainer.appendChild(tagElement);
+    
+                // Clear the input field
+                input.value = '';
+            }
+        }
+    }</script>
+
+
 {% endblock  %}
 

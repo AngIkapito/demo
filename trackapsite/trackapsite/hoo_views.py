@@ -633,6 +633,7 @@ def ADD_ANNOUNCEMENT(request):
         announcement_description = request.POST.get('announcement_description')
         announcement_banner = request.FILES.get('announcement_banner')
         announcement_status = request.POST.get('announcement_status')
+        announcement_tags = request.POST.get('announcement_tags')
         # print(program_name)
         
         announcement = Announcement (
@@ -643,6 +644,13 @@ def ADD_ANNOUNCEMENT(request):
             created_by_id=request.user.id  # Set the created_by_username to the current user
         )
         announcement.save()
+        
+        # Handle tags
+        if announcement_tags:
+            tags_list = [tag.strip() for tag in announcement_tags.split(',')]
+            announcement.tags.add(*tags_list)  # Add tags to the announcement
+        
+        
         messages.success(request, 'Announcement successfully added!')
         return redirect('view_announcement')
     return render(request, 'hoo/add_announcement.html')
@@ -656,12 +664,14 @@ def DELETE_ANNOUNCEMENT(request, id):
 def EDIT_ANNOUNCEMENT(request, id):
     announcement = Announcement.objects.filter(id = id)
     announcements = Announcement.objects.all()
+    # tags_string = ', '.join([str(tag) for tag in announcement.tags.all()])
     
     context = {
         'announcement':announcement,
         'announcements':announcements,
+        # 'tags_string': tags_string,  # Pass the tags string to the template
     }
-    
+
     return render(request,'hoo/edit_announcement.html', context)
 
 def UPDATE_ANNOUNCEMENT(request):
@@ -671,13 +681,15 @@ def UPDATE_ANNOUNCEMENT(request):
         announcement_description = request.POST.get('announcement_description')
         announcement_banner = request.FILES.get('announcement_banner')
         announcement_status = request.POST.get('announcement_status')
+        announcement_tags = request.POST.get('announcement_tags')
         # print(program)
         # Convert the string value to a boolean
        
         announcement = Announcement.objects.get(id = id)
         announcement.title = announcement_title
         announcement.description = announcement_description
-        # announcement.banner = announcement_banner,
+        announcement.banner = announcement_banner
+        
         if announcement_status == '1':
             announcement.status = True
         elif announcement_status == '0':
@@ -686,6 +698,12 @@ def UPDATE_ANNOUNCEMENT(request):
             # Handle case where no valid status is provided
             announcement.status = None  # or keep it unchanged
         # announcement.status = announcement_status,
+        
+        if announcement_tags:
+            # Split the tags into a list
+            tags_list = [tag.strip() for tag in announcement_tags.split(',')]
+            # Clear existing tags and add new ones
+            announcement.tags.set(*tags_list)  # Use set() to replace existing tags
         
         announcement.save()
         

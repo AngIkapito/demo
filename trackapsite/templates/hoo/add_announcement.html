@@ -47,6 +47,12 @@
         <img id="image_preview" src="#" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;" />
     </div><br>
 
+    <div class="col-sm-11">
+    <label for="announcement_tags">Tags (comma-separated):</label>
+    <input type="text" id="announcement_tags " name="announcement_tags" placeholder="Enter Tags (press Enter to add)" onkeydown="addTag(event)">
+        <div id="tag_container"><em>Tags: &nbsp;</em></div>
+    </div><br>
+
      <div class="col-sm-11">
         <label for="announcement_status">Publish it Now?</label>
         <select class="form-control" id="announcement_status" name="announcement_status">
@@ -90,5 +96,28 @@
             }
         }
     </script>
+    
+
+  <script>
+        function addTag(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent form submission
+                const input = document.getElementById('announcement_tags');
+                const tagContainer = document.getElementById('tag_container');
+                const tag = input.value.trim();
+        
+                if (tag) {
+                    // Create a new span element for the tag
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'tag'; // You can style this class in CSS
+                    tagElement.textContent = `#${tag} `;
+                    tagContainer.appendChild(tagElement);
+        
+                    // Clear the input field
+                    input.value = '';
+                }
+            }
+        }
+        </script>
 {% endblock  %}
 
