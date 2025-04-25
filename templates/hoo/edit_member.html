@@ -168,7 +168,7 @@
           <input type="file" class="form-control" accept=".jpg, .jpeg, .png" name="profile_pic" value= "{{ member.profile_pic}}" onchange="previewImage(event)"/>
        </div> 
        <div class="image-preview text-center" id="imagePreview" style="display: block;">
-        <img id="preview" src="{{member.admin.profile_pic.url}}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
+        <img id="preview" src="{% if member.admin.profile_pic %}{{ member.admin.profile_pic.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
     </div>
       
 

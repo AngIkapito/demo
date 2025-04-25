@@ -226,8 +226,8 @@ def REGISTRATION_BYPASS1(request):
         last_name = request.POST.get('last_name').upper()
         email = request.POST.get('email').strip().lower()
         
-        username = request.POST.get('username').strip().lower()
-        password = request.POST.get('password')
+        # username = request.POST.get('username')
+        # password = request.POST.get('password')
         
         membershiptype_id = request.POST.get('membershiptype_id')
         membertype_id = request.POST.get('membertype_id')
@@ -236,7 +236,7 @@ def REGISTRATION_BYPASS1(request):
         salutation_id = request.POST.get('salutation_id')
         officertype_id = request.POST.get('officertype_id')
         middle_name = request.POST.get('middle_name').upper()
-        profile_pic = request.FILES.get('profile_pic')
+        # profile_pic = request.FILES.get('profile_pic')
         position = request.POST.get('position').upper()
         contact_no = request.POST.get('contact_no')
         birthdate = request.POST.get('birthdate')
@@ -262,9 +262,9 @@ def REGISTRATION_BYPASS1(request):
              messages.warning(request,'Email is already taken')
              return redirect('registration_bypass1')
          
-        elif CustomUser.objects.filter(username=username).exists():
-             messages.warning(request,'Username is already taken')
-             return redirect('registration_bypass1')     
+        # elif CustomUser.objects.filter(username=username).exists():
+        #      messages.warning(request,'Username is already taken')
+        #      return redirect('registration_bypass1')     
          
         else:
             user = CustomUser(
@@ -273,12 +273,12 @@ def REGISTRATION_BYPASS1(request):
                 user_type = 3,
                 first_name = first_name,
                 last_name = last_name,
-                username = username,
+                # username = username,
                 email = email,
-                profile_pic = profile_pic,
+                # profile_pic = profile_pic,
                 )      
               
-            user.set_password(password)
+            # user.set_password(password)
             user.save()
             
             member = Member(
