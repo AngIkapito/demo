@@ -19,19 +19,25 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body class="bg-gradient-primary">
-
-    <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card" style="position: absolute; top: 10%; left: 30%; right: 30%; transform: translate(0%, 0%);">
+    {% comment %}<div class="card o-hidden border-0 shadow-lg my-5">{% endcomment %}
+        
         <div class="card-body p-0">
+            
             <!-- Nested Row within Card Body -->
             <div class="row">
+                
                 {% comment %} <div class="col-lg-5 d-none d-lg-block bg-register-image">
                      <img src=" {% static "img/android-chrome-512x512.png" %} " class="img-fluid" alt="TracKaPSITElogo"> 
                 </div> {% endcomment %}
-                <div class="col-lg-7">
+                <div class="col-lg-12">
+                    <a href="{% url 'login' %}" class="btn btn-secondary" title="Go Back">
+                        <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back</a>
+                    
                     <div class="p-5">
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Membership Registration</h1>
@@ -42,157 +48,170 @@
                            {% include 'includes/messages.html' %}
 
                            <fieldset>
-                        <legend>For Access</legend>
+                      
                         <div class="form-group">
-                            <label for="is_superuser" hidden>Is Superuser?</label>
+                            {% comment %} <label for="is_superuser" hidden>Is Superuser?</label>
                             <select class="form-control" id="is_superuser" name="is_superuser" hidden/>
                                     <option value="1">True</option>  <!-- Current salutation as default -->
                                     <option value="0" selected>False</option>  <!-- Default option if no salutation -->
-                            </select> 
-                         
-                            <label for="is_active">Is Active?</label>
-                            <select class="form-control" id="is_active" name="is_active" >
-                                <option value="1" selected>True</option>  <!-- Current salutation as default -->
-                                <option value="0">False</option>  <!-- Default option if no salutation -->
-                            </select> 
-
-                            <label for="user_type">User Type?</label>
-                            <select class="form-control" id="user_type" name="user_type" required/>
-                                <option value="" disabled selected>SELECT USER TYPE</option>  <!-- Default option -->
-                                <option value="1">1 - PRESIDENT</option>
-                                <option value="2">2 - OFFICER/AREA COORDINATOR</option>
-                                <option value="3" selected>3 - MEMBER</option>
-                            </select>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Member Information</legend>
-                            <div class="form-group">
-                                <label for="membership_type">Membership Type</label>
-                                <select class="form-control" id="membership_type" name="membership_type" required/>
-                                    <option value="" disabled selected>SELECT MEMBERSHIP TYPE</option>  <!-- Default option if no membership type is selected -->
-                                    {% for membershiptype in membershiptypes %}
-                                        <option value="{{ membershiptype.membershiptype_name }}">{{ membershiptype.membershiptype_name }}</option>
+                            </select>  {% endcomment %}
+                            <fieldset>
+                                <legend>Member Information</legend>
+        
+                                <label for="officertype_id" hidden>PSITE CL Officer?</label>
+                                <select class="form-control" id="officertype_id" name="officertype_id" hidden required/>
+                                <option value="9" selected>MEMBER ONLY</option>  <!-- Default option if no membership type is selected -->
+        
+                                {% for officertype in officertypes %}
+                                    {% if officertype.id != 9 and officertype.id != customuser.officertype_id %}  <!-- Exclude 'Non-Officer/Member only' and the current officertype -->
+                                        <option value="{{ officertype.id }}">{{ officertype.name }}</option>
+                                    {% endif %}
+        
+                                {% endfor %}
+        
+                                </select>
+        
+                                    <div class="form-group">
+                                        <label for="membershiptype_id">Membership Type
+                                            <i class="fas fa-info-circle" 
+                                            data-toggle="tooltip" 
+                                            title="Select your membership type. Each type has different benefits and pricing."></i>
+                                        </label>
+                                        <select class="form-control" id="membershiptype_id" name="membershiptype_id" required/>
+                                            <option value="" disabled selected>SELECT MEMBERSHIP TYPE</option>  <!-- Default option if no membership type is selected -->
+                                            {% for membershiptype in membershiptypes %}
+                                                <option value="{{ membershiptype.id }}">{{ membershiptype.name }} - {{membershiptype.price}} PESOS</option>
+                                            {% endfor %}
+                                        </select>
+        
+                                <label for="membertype_id">Member Type</label>
+                                <select class="form-control" id="membertype_id" name="membertype_id" required/>
+                                    <option value="" disabled selected>SELECT MEMBER TYPE</option>  <!-- Default option if no salutation -->
+                                    {% for membertype in membertypes %}
+                                        <option value="{{ membertype.id }}">{{ membertype.name }}</option>
                                     {% endfor %}
                                 </select>
-
-                        <label for="member_type">Member Type</label>
-                        <select class="form-control" id="member_type" name="member_type" required/>
-                            <option value="" disabled selected>SELECT MEMBER TYPE</option>  <!-- Default option if no salutation -->
-                            {% for membertype in membertypes %}
-                                <option value="{{ membertype.membertype_name }}">{{ membertype.membertype_name }}</option>
-                            {% endfor %}
-                        </select>
-                        
-                        </div>
-
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="salutation">Salutation</label>
-                            <select class="form-control" id="salutation" name="salutation" required/>
-                            <option value="" disabled selected>SELECT SALUTATION</option>  <!-- Default option -->
-                                {% for salutation in salutations %}
-                                    <option value="{{ salutation.salutation_name }}">{{ salutation.salutation_name }}</option>  <!-- Display each salutation -->
-                                {% endfor %}
-                        </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input type="text" style="text-transform: uppercase;" class="form-control  " id="first_name"
-                                placeholder="First Name" oninput="generateUsername()" name="first_name" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" style="text-transform: uppercase;" class="form-control  " id="last_name"
-                                placeholder="Last Name" oninput="generateUsername()" name="last_name" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="middle_name">Middle Name</label>
-                            <input type="text" style="text-transform: uppercase;" class="form-control  " id="middle_name"
-                                placeholder="Middle Name" name="middle_name"/>
-                        </div>
-                    </div>
-
-                    
-                    <div class="form-group">
-                        <label>Profile Picture</label>
-                        <input type="file" class="form-control" accept=".jpg, .jpeg, .png" name="profile_pic"/>
-                     </div> 
-
-                     <div class="form-group">
-                        <label for="position">Position</label>
-                        <input type="text" style="text-transform: uppercase;" class="form-control  " id="position"
-                            placeholder="Position" name="position"  required/>
-                    </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" class="form-control" id="email"
-                                placeholder="Email Address" name="email" style="text-transform: lowercase;" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contact_no">Contact Number</label>
-                            <input type="tel" class="form-control" id="contact_no"
-                            placeholder="Contact No. Ex. 09123456789" name="contact_no" 
-                            maxlength="11" required pattern="09[0-9]{9}" title="Please enter a valid 11-digit contact number."/>                        
-                        </div>
-                            
-                        <div class="form-group">
-                            <label for="birthdate">Birthdate</label>
-                            <input type="date" class="form-control" id="birthdate" name="birthdate" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="facebook_profile_link">Facebook Profile Link:</label>
-                            <input type="url" class="form-control" id="facebook_profile_link" name="facebook_profile_link" placeholder="https://www.facebook.com/yourprofile" required />
-                        </div>
-                        <div class="form-group">
-                        <label for="proof_of_payment">Proof of Payment:</label>
-                        <input type="file" class="form-control" id="proof_of_payment" name="proof_of_payment" accept=".pdf, .jpg, .jpeg, .png">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="payment_date">Payment Date:</label>
-                            <input type="date" class="form-control" id="payment_date" name="payment_date" required/>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Login Information</legend>
-
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" style="text-transform: lowercase;" id="username" placeholder="Username" name="username" required/>
-                        </div>
-                    
-                        <div class="form-group">
-                                <label for="password">Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" id="password" placeholder="Type 'Sample#01'" name="password" required/>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text toggle-password" 
-                                            onclick="togglePasswordVisibility()" 
-                                            data-toggle="tooltip" 
-                                            title="Show/Hide Password">
-                                            <i class="fas fa-eye" id="eye-icon"></i>
-                                        </span>
-                                        <button  title="Generate Password" class="btn btn-outline-secondary" type="button" onclick="generatePassword()"><i class="fas fa-dice"></i></button>
-                                    </div>
-                                </div>
                                 
-                    </fieldset>
-                    <div id="notificationArea" class="alert alert-danger d-none" role="alert"></div>
-                    <div class="col-sm mb-3">
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" id="termsCheckbox" name="terms_accepted" value="true"  required>
-                                I accept the terms of membership.
-                            </label>
-                        </div>
-                        <div class="agreement">
-                            If accepted for membership, I agree to comply with the requirements of the By-Laws, and all regulations adopted by the Society with full knowledge of the responsibility imposed upon me.
-                        </div>
-                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organization_id">School/Organization</label>
+                                    <select class="form-control" id="organization_id" name="organization_id" required/>
+                                    <option value="" disabled selected>SELECT SCHOOL / ORGANIZATION</option>  <!-- Default option -->
+                                        {% for organization in organizations %}
+                                            <option value="{{ organization.id }}">{{ organization.name }}</option>  <!-- Display each salutation -->
+                                        {% endfor %}
+                                </select>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="position">Position</label>
+                                    <input type="text" class="form-control text-uppercase" id="position"
+                                        placeholder="Position" name="position" required/>
+                                </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="salutation_id">Salutation</label>
+                                    <select class="form-control" id="salutation_id" name="salutation_id" required/>
+                                    <option value="" disabled selected>SELECT SALUTATION</option>  <!-- Default option -->
+                                        {% for salutation in salutations %}
+                                            <option value="{{ salutation.id }}">{{ salutation.name }}</option>  <!-- Display each salutation -->
+                                        {% endfor %}
+                                </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control  text-uppercase" id="first_name"
+                                        placeholder="First Name" oninput="generateUsername()" name="first_name" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control text-uppercase" id="last_name"
+                                        placeholder="Last Name" oninput="generateUsername()" name="last_name" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="middle_name">Middle Name</label>
+                                    <input type="text" style="text-transform: uppercase;" class="form-control  " id="middle_name"
+                                        placeholder="Middle Name" name="middle_name"/>
+                                </div>
+                            </div>
+        
+                            
+                            {% comment %} <div class="form-group">
+                                <label>Profile Picture</label>
+                                <input type="file" class="form-control" accept=".jpg, .jpeg, .png" name="profile_pic"/>
+                             </div>  {% endcomment %}
+                           
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" class="form-control text-lowercase" id="email"
+                                        placeholder="Email Address" name="email" required/>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="contact_no">Contact Number</label>
+                                    <input type="tel" class="form-control" id="contact_no"
+                                    placeholder="eg. 09123456789" name="contact_no" 
+                                    maxlength="11" required pattern="09[0-9]{9}" title="Please enter a valid 11-digit contact number."/>                        
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="birthdate">Birthdate</label>
+                                    <input type="date" class="form-control" id="birthdate" name="birthdate" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="facebook_profile_link">Facebook Profile Link:</label>
+                                    <input type="url" class="form-control" id="facebook_profile_link" name="facebook_profile_link" placeholder="eg. https://www.facebook.com/yourprofile" required />
+                                </div>
+                                <div class="form-group">
+                                <label for="proof_of_payment">Proof of Payment:</label>
+                                <input type="file" class="form-control" id="proof_of_payment" name="proof_of_payment" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="payment_date">Payment Date:</label>
+                                    <input type="date" class="form-control" id="payment_date" name="payment_date" required/>
+                                </div>
+                            </fieldset>
+        
+                            {% comment %} <fieldset>
+                                <legend>Login Information</legend>
+        
+                                <div class="form-group">
+                                    <label for="username">Username
+                                        <i class="fas fa-info-circle" 
+                                            data-toggle="tooltip" 
+                                            title="You cannot change this after creating this Member Account"></i>
+                                    </label>
+                                    <input type="text" class="form-control text-lowercase" id="username" placeholder="Username" name="username" required/>
+                                </div>
+                            
+                                <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password" placeholder="Type 'Sample#01'" name="password" required/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text toggle-password" 
+                                                    onclick="togglePasswordVisibility()" 
+                                                    data-toggle="tooltip" 
+                                                    title="Show/Hide Password">
+                                                    <i class="fas fa-eye" id="eye-icon"></i>
+                                                </span>
+                                                <button  title="Generate Password" class="btn btn-outline-secondary" type="button" onclick="generatePassword()"><i class="fas fa-dice"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                            </fieldset> {% endcomment %}
+                            <div id="notificationArea" class="alert alert-danger d-none" role="alert"></div>
+                            <div class="col-sm mb-3">
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="termsCheckbox" name="terms_accepted" value="true"  required>
+                                        I accept the terms of membership.
+                                    </label>
+                                </div>
+                                <div class="agreement">
+                                    If accepted for membership, I agree to comply with the requirements of the By-Laws, and all regulations adopted by the Society with full knowledge of the responsibility imposed upon me.
+                                </div>
+                            </div>
 
                     <button id="registerButton" class="btn btn-primary btn-block" type="submit" onclick="return validateForm()">Register</button>
                     
@@ -338,7 +357,7 @@
 </script>
 
 {% comment %} Show or Hide password {% endcomment %}
-<script>
+{% comment %} <script>
     function togglePasswordVisibility() {
         const passwordInput = document.getElementById('password');
         const eyeIcon = document.getElementById('eye-icon');
@@ -354,7 +373,7 @@
             eyeIcon.classList.add('fa-eye'); // Corrected class name
         }
     }
-</script>
+</script> {% endcomment %}
 <script>
     document.getElementById("contact_no").addEventListener("input", function() {
         const contactNo = this.value;

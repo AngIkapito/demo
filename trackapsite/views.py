@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, HttpResponse
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from app.models import CustomUser, School_Year, Salutation, MembershipType, MemberType, Announcement
+from app.models import CustomUser, School_Year, Salutation, Member, MembershipType, MemberType, Announcement, OfficerType, Organization
 from django.utils.safestring import mark_safe
 from django.urls import path, include, reverse
 from datetime import datetime
@@ -135,109 +135,6 @@ def doLogout(request):
     logout(request)
     return redirect('homepage')
 
-def REGISTRATION_BYPASS(request):
-   
-    if request.method == "POST":
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-                      
-        if email and CustomUser.objects.filter(email=email).exists():
-             messages.warning(request,'Email is already taken')
-             return redirect('registration')
-        elif CustomUser.objects.filter(username=username).exists():
-             messages.warning(request,'Username is already taken')
-             return redirect('registration')     
-        else:
-            user = CustomUser(
-                first_name = first_name,
-                last_name = last_name,
-                username = username,
-                email = email if email else None,
-                user_type = 3,
-                )        
-            user.set_password(password)
-            user.save()
-            
-            login_link = reverse('login')  # Assuming 'login' is the name of your login URL pattern
-            login_message = f'{user.first_name} {user.last_name} is successfully added. <a href="{login_link}">Click here to login.</a>'
-            messages.success(request, mark_safe(login_message))
-            return redirect('registration_bypass')
-    
-    return render(request, 'registration_bypass.html')
-
-# Pagamit ito sa mga SSITE officer para mag add ng mga members sa 
-# System using trackapsite.com/registration_bypass1/
-def REGISTRATION_BYPASS1(request):
-    
-    if request.method == "POST":
-        is_superuser = request.POST.get('is_superuser')
-        is_active = request.POST.get('is_active')
-        user_type = request.POST.get('user_type')
-        
-        membership_type = request.POST.get('membership_type')
-        member_type = request.POST.get('member_type')
-        
-        salutation = request.POST.get('salutation')
-        first_name = request.POST.get('first_name').upper()
-        last_name = request.POST.get('last_name').upper()
-        middle_name = request.POST.get('middle_name').upper()
-        # profile_pic = request.FILES.get('profile_pic')
-        position = request.POST.get('position').upper()
-        email = request.POST.get('email')
-        contact_no = request.POST.get('contact_no')
-        birthdate = request.POST.get('birthdate')
-        facebook_profile_link = request.POST.get('facebook_profile_link')
-        # proof_of_payment = request.FILES.get('proof_of_payment')
-        # payment_date = request.POST.get('payment_date')
-        # terms_accepted = request.POST.get('terms_accepted')
-        
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-                      
-        if email and CustomUser.objects.filter(email=email).exists():
-             messages.warning(request,'Email is already taken')
-             return redirect('registration')
-        if CustomUser.objects.filter(username=username).exists():
-             messages.warning(request,'Username is already taken')
-             return redirect('registration')     
-        else:
-            user = CustomUser(
-                is_superuser = is_superuser,
-                is_active = is_active,
-                user_type = user_type,
-                
-                membership_type = membership_type,
-                member_type = member_type,
-                
-                salutation = salutation,
-                first_name = first_name,
-                last_name = last_name,
-                middle_name = middle_name,
-                birthdate = birthdate,
-                # profile_pic = profile_pic,
-                position = position,
-                contact_no = contact_no,
-                facebook_profile_link = facebook_profile_link,
-                # proof_of_payment = proof_of_payment,
-                # payment_date = payment_date,
-                # terms_accepted = terms_accepted,
-                
-                username = username,
-                email = email if email else None,
-                )        
-            user.set_password(password)
-            user.save()
-            
-            login_link = reverse('login')  # Assuming 'login' is the name of your login URL pattern
-            login_message = f'{user.first_name} {user.last_name} is successfully added. <a href="{login_link}">Click here to login.</a>'
-            messages.success(request, mark_safe(login_message))
-            return redirect('registration_bypass1')
-    
-    return render(request, 'registration_bypass1.html', {
-    })
 
 @login_required(login_url='/')  
 def PROFILE(request):
@@ -278,3 +175,144 @@ def PROFILE_UPDATE(request):
         except:
             messages.error(request, 'Failed to update your profile')
     return render(request,'profile.html')    
+
+
+def REGISTRATION_BYPASS(request):
+   
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+                      
+        if email and CustomUser.objects.filter(email=email).exists():
+             messages.warning(request,'Email is already taken')
+             return redirect('registration')
+        elif CustomUser.objects.filter(username=username).exists():
+             messages.warning(request,'Username is already taken')
+             return redirect('registration')     
+        else:
+            user = CustomUser(
+                first_name = first_name,
+                last_name = last_name,
+                username = username,
+                email = email if email else None,
+                user_type = 3,
+                )        
+            user.set_password(password)
+            user.save()
+            
+            login_link = reverse('login')  # Assuming 'login' is the name of your login URL pattern
+            login_message = f'{user.first_name} {user.last_name} is successfully added. <a href="{login_link}">Click here to login.</a>'
+            messages.success(request, mark_safe(login_message))
+            return redirect('registration_bypass')
+    
+    return render(request, 'registration_bypass.html')
+
+# Pagamit ito sa mga SSITE officer para mag add ng mga members sa 
+# System using trackapsite.com/registration_bypass1/
+def REGISTRATION_BYPASS1(request):
+    salutations = Salutation.objects.all()
+    membershiptypes = MembershipType.objects.all()
+    membertypes = MemberType.objects.all()
+    officertypes = OfficerType.objects.all()
+    organizations = Organization.objects.all()
+    # customuser = CustomUser.objects.all()
+    
+    if request.method == "POST":
+        # is_superuser = request.POST.get('is_superuser')
+        first_name = request.POST.get('first_name').upper()
+        last_name = request.POST.get('last_name').upper()
+        email = request.POST.get('email').strip().lower()
+        
+        username = request.POST.get('username').strip().lower()
+        password = request.POST.get('password')
+        
+        membershiptype_id = request.POST.get('membershiptype_id')
+        membertype_id = request.POST.get('membertype_id')
+        organization_id = request.POST.get('organization_id')
+        
+        salutation_id = request.POST.get('salutation_id')
+        officertype_id = request.POST.get('officertype_id')
+        middle_name = request.POST.get('middle_name').upper()
+        profile_pic = request.FILES.get('profile_pic')
+        position = request.POST.get('position').upper()
+        contact_no = request.POST.get('contact_no')
+        birthdate = request.POST.get('birthdate')
+        
+        # Get the birthdate and convert it to a date object
+        # birthdate_str = request.POST.get('birthdate')
+        # birthdate = None
+        # if birthdate_str:
+        #     try:
+        #         birthdate = datetime.datetime.strptime(birthdate_str, '%Y-%m-%d').date()
+        #     except ValueError:
+        #         messages.warning(request, 'Invalid birthdate format. Please use YYYY-MM-DD.')
+        #         return redirect('registration_bypass1')
+        
+        facebook_profile_link = request.POST.get('facebook_profile_link')
+        proof_of_payment = request.FILES.get('proof_of_payment')
+        payment_date = request.POST.get('payment_date')
+        terms_accepted = request.POST.get('terms_accepted') == 'true'
+        
+                 
+        print(f"Checking email: {email}, Exists: {CustomUser .objects.filter(email=email).exists()}")              
+        if email and CustomUser.objects.filter(email=email).exists():
+             messages.warning(request,'Email is already taken')
+             return redirect('registration_bypass1')
+         
+        elif CustomUser.objects.filter(username=username).exists():
+             messages.warning(request,'Username is already taken')
+             return redirect('registration_bypass1')     
+         
+        else:
+            user = CustomUser(
+                is_superuser = 0,
+                is_active = 0,
+                user_type = 3,
+                first_name = first_name,
+                last_name = last_name,
+                username = username,
+                email = email,
+                profile_pic = profile_pic,
+                )      
+              
+            user.set_password(password)
+            user.save()
+            
+            member = Member(
+                admin = user, 
+                membershiptype_id = membershiptype_id,
+                membertype_id = membertype_id,
+                officertype_id = officertype_id,
+                organization_id = organization_id,
+                
+                salutation_id = salutation_id,
+                middle_name = middle_name,
+                birthdate = birthdate,
+                position = position,
+                contact_no = contact_no,
+                facebook_profile_link = facebook_profile_link,
+                payment_date = payment_date,
+                proof_of_payment = proof_of_payment,
+                terms_accepted = terms_accepted,
+            )
+            
+            member.save()
+            
+            home_link = reverse('home')  # Assuming 'login' is the name of your login URL pattern
+            registration_message = f'{user.first_name} {user.last_name}. Kindly wait for the verification of your Membership. <br>Your default credentials will be sent via your Email. <a href="{home_link}">Click here to go to Homepage.</a>'
+            messages.success(request, mark_safe(registration_message))
+            # messages.success(request,user.first_name + " " + user.last_name + ", Kindly wait for the confirmation sent via your Email")
+            # return redirect('home')
+    
+    context = {
+        'salutations': salutations,  # Pass the salutations to the template
+        'membershiptypes':membershiptypes,
+        'membertypes': membertypes,
+        'officertypes': officertypes,
+        'organizations': organizations,
+    }
+    
+    return render(request, 'registration_bypass1.html', context)

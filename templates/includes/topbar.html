@@ -156,11 +156,14 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     
-                                    Welcome,&nbsp<span><b>{{ user.first_name }} {{ user.last_name }}</b></span>&nbsp;!
+                                    Welcome,&nbsp<span><b>{{ user.username }}</b></span>&nbsp;!
                                     
                                 </span>
+                                {% load static %}
+
                                 <img class="img-profile rounded-circle"
-                                    src="{{user.profile_pic.url}}">
+                                    src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'img/default_profile.png' %}{% endif %}"
+                                    alt="Profile Picture">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

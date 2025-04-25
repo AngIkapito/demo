@@ -22,7 +22,7 @@
                             <input type="file" class="form-control" name="profile_pic" id="profilePicInput" accept="image/*" onchange="previewImage(event)">
                             <div class="image-preview text-center" id="imagePreview" style="display: block;">
 
-                              <img id="preview" src="{{user.profile_pic.url}}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
+                              <img id="preview" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'img/default_profile.png' %}{% endif %}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
                           </div>
                            </div>
                         
