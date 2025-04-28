@@ -102,14 +102,12 @@ class Member(models.Model):
     #Membership Information
     officertype = models.ForeignKey(OfficerType, on_delete=models.CASCADE)
     membershiptype = models.ForeignKey(MembershipType, on_delete=models.CASCADE)
-    membertype = models.ForeignKey(MemberType, on_delete=models.CASCADE)
+    # membertype = models.ForeignKey(MemberType, on_delete=models.CASCADE)
     salutation = models.ForeignKey(Salutation, on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     
     position = models.CharField(max_length=50)
     facebook_profile_link = models.URLField(blank=True, null=True)
-    proof_of_payment = models.FileField(upload_to='payments/')
-    payment_date = models.DateField(null=True, blank=True)
     terms_accepted = models.BooleanField(default=False, null=True, blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
@@ -117,6 +115,19 @@ class Member(models.Model):
     
     def __str__(self):
         return self.admin.first_name + " " + self.admin.last_name
+    
+class Membership(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='members')
+    membertype = models.ForeignKey(MemberType, on_delete=models.CASCADE, related_name='membertypes')
+    school_year = models.ForeignKey(School_Year, on_delete=models.CASCADE)
+    proof_of_payment = models.FileField(upload_to='payments/')
+    payment_date = models.DateField(null=True, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.member.admin.first_name} {self.member.admin.last_name} - {self.membership_type.name} ({self.school_year})"
     
 class Event(models.Model):
     title = models.CharField(max_length=200)
@@ -173,6 +184,14 @@ class Announcement(models.Model):
 
 #     def __str__(self):
 #         return f"{self.user.username} - {self.event.title} ({self.status})"
+
+class Test(models.Model):
+    name = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.name
     
 
     
