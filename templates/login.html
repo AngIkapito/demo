@@ -76,16 +76,17 @@
                                         </div>
     
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
-                                        <a href="{% url 'home' %}" class="btn btn-secondary btn-user btn-block">Back to Homepage</a>
+                                        <a href="{% url 'homepage' %}" class="btn btn-secondary btn-user btn-block">Back to Homepage</a>
     
                                     </form>
     
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot_password.html">Forgot Password?</a>
+                                        <a href="" hidden>Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="{% url 'registration_bypass1' %}">Don't have an Account? Register</a>
+                                        Register as <a href="{% url 'registration_new' %}">New Member</a>
+                                         <br>or <a href="{% url 'registration_renew' %}">Renew Membership</a>
                                     </div>
                                 </div>
                             </div>

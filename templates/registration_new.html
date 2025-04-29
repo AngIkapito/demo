@@ -53,22 +53,22 @@
                             <fieldset>
                                 <legend>Member Information</legend>
                                 <label for="membertype_id">MemberType</label>
-                                    <input type="text" class="form-control text-uppercase" id="membertype_id"
-                                         name="membertype_id" value="1" required/>
-        
+                                   <input type="text" class="form-control text-uppercase" id="membertype_id"
+                                         name="membertype_id" value="1" required/> 
+                                     
+                                    <label for="school_year_id">School Year ID</label>
+                                    <input type="text" class="form-control text-uppercase" id="school_year_id"
+                                            name="school_year_id" value="{{latest_school_year.id}}" required/>
+
                                 <label for="officertype_id">PSITE CL Officer?</label>
                                 <select class="form-control" id="officertype_id" name="officertype_id" required/>
-                                <option value="9" selected>MEMBER ONLY</option>  <!-- Default option if no membership type is selected -->
+                                <option value="1" selected>MEMBER ONLY</option>  <!-- Default option if no membership type is selected -->
                                 {% for officertype in officertypes %}
-                                    {% if officertype.id != 9 and officertype.id != customuser.officertype_id %}  <!-- Exclude 'Non-Officer/Member only' and the current officertype -->
+                                    {% if officertype.id != 1 and officertype.id != customuser.officertype_id %}  <!-- Exclude 'Non-Officer/Member only' and the current officertype -->
                                         <option value="{{ officertype.id }}">{{ officertype.name }}</option>
                                     {% endif %}
                                 {% endfor %}
                                 </select>
-
-                                <label for="school_year_id">School Year ID</label>
-                                <input type="text" class="form-control text-uppercase" id="school_year_id"
-                                     name="school_year_id" value="{{latest_school_year.id}}" required/>
 
                                 {% comment %} <label for="school_year_id">School Year</label>
                                 <select class="form-control" id="school_year_id" name="school_year_id" required>
@@ -175,7 +175,7 @@
                                     </label>
                                     <input type="text" class="form-control text-lowercase" id="username" placeholder="Username" name="username" required/>
                                 </div>
-                             {% comment %} 
+                             {% comment %} {% endcomment %}
                                 <div class="form-group">
                                         <label for="password">Password</label>
                                         <div class="input-group">
@@ -190,8 +190,7 @@
                                                 <button  title="Generate Password" class="btn btn-outline-secondary" type="button" onclick="generatePassword()"><i class="fas fa-dice"></i></button>
                                             </div>
                                         </div>
-                                        
-                            </fieldset> {% endcomment %}
+                            </fieldset> 
                             
                             <div id="notificationArea" class="alert alert-danger d-none" role="alert"></div>
                             <div class="col-sm mb-3">

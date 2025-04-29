@@ -7,15 +7,15 @@ from .import views, hoo_views, member_views, officer_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.HOME, name='home'),
+    path('', views.HOMEPAGE, name='homepage'),
     path('about/', views.ABOUT, name='about'),
     path('contact/', views.CONTACT, name='contact'),
     path('announcement/', views.ANNOUNCEMENT, name='announcement'),
     path('event/', views.EVENT, name='event'),
     path('base/',views.BASE,name='base'),
     path('registration/', views.REGISTRATION, name='registration'),
-    path('registration_bypass/', views.REGISTRATION_BYPASS, name='registration_bypass'),
-    path('registration_bypass1/', views.REGISTRATION_BYPASS1, name='registration_bypass1'),
+    path('registration_new/', views.REGISTRATION_NEW, name='registration_new'),
+    path('registration_renew/', views.REGISTRATION_RENEW, name='registration_renew'),
     path('error/', views.ERRORPAGE, name='error_page'),  # Define the error page URL
     # path('forgot_password/', views.FORGOT_PASSWORD, name='forgot_password'),
 
@@ -25,7 +25,7 @@ urlpatterns = [
     path('doLogout', views.doLogout, name='logout'),
     
     # Profile Update
-    path('profile', views.PROFILE,name='profile'),
+    path('profile', views.PROFILE, name='profile'),
     path('profile/update',views.PROFILE_UPDATE, name='profile_update'),
     
     #President/Admin/Head of Organization Panel
@@ -95,6 +95,9 @@ urlpatterns = [
     # path('hoo/Salutation/Edit/<str:id>', hoo_views.EDIT_SALUTATION, name='edit_salutation'),
     # path('hoo/Salutation/Update', hoo_views.UPDATE_SALUTATION, name='update_salutation'),
     # path('hoo/Salutation/Delete/<str:id>', hoo_views.DELETE_SALUTATION, name='delete_salutation'),
+    
+    
+    path('hoo/MembershipRegistration/View', hoo_views.MEMBERSHIP_REGISTRATION, name='membership_registration'),
     
     #Officer Panel
     path('officer/home', officer_views.home, name='officer_home'),

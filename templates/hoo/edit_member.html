@@ -109,7 +109,7 @@
                 </select>
 
 
-          <p style="color: red" hidden>Current Member Type: {{ member.membertype.name }}</p>
+          {% comment %} <p style="color: red" hidden>Current Member Type: {{ member.membertype.name }}</p>
           <label for="member_type">Member Type</label>
           <select class="form-control" id="member_type" name="member_type" >
                 {% if member.membertype.name %}
@@ -123,7 +123,7 @@
                         <option value="{{ membertype.id }}">{{ membertype.name }}</option>
                     {% endif %}
                 {% endfor %}
-            </select>
+            </select> {% endcomment %}
         </div>
 
       <div class="form-group">
@@ -168,7 +168,7 @@
           <input type="file" class="form-control" accept=".jpg, .jpeg, .png" name="profile_pic" value= "{{ member.profile_pic}}" onchange="previewImage(event)"/>
        </div> 
        <div class="image-preview text-center" id="imagePreview" style="display: block;">
-        <img id="preview" src="{% if member.admin.profile_pic %}{{ member.admin.profile_pic.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
+        <img id="preview" src="{% if member.admin.profile_pic %}{{ member.admin.profile_pic.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
     </div>
       
 
@@ -220,14 +220,8 @@
           <div class="form-group">
               
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" placeholder="Fill only if you want to change your password">
-              
-              {% comment %} <div class="col-sm-6">
-                  <label for="repeatpassword">Repeat Password</label>
-                  <input type="password" class="form-control form-control-user"
-                      id="repeatpassword" placeholder="Type 'Sample#01'" name="repeatpassword"  value= "{{customuser.0.password}}"/>
-                      <label id="passwordError" class="form-label text-danger d-none">Passwords do not match.</label>
-                  </div> {% endcomment %}
+                  <input type="password" class="form-control" name="password" placeholder="Fill only if you want to change your password" >
+
           </div>
       </fieldset>
           <div class="col-sm mb-3">
@@ -246,33 +240,6 @@
             <div class="col-12">
                <button type="submit" class="btn btn-primary">Update Member</button>
             </div>
-
-          {% comment %} <button id="registerButton" class="btn btn-primary btn-user btn-block" type="submit">Register</button> {% endcomment %}
-          {% comment "" %}
-          <hr>
-          <a href="index.html" class="btn btn-google btn-user btn-block">
-              <i class="fab fa-google fa-fw"></i> Register with Google
-          </a>
-          <a href="index.html" class="btn btn-facebook btn-user btn-block">
-              <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-          </a>
-          {% endcomment %}
-      
-
-      {% comment %} <div class="col-sm-11">
-         <div class="form-group">
-            <label>Start of Cycle</label>
-            <input type="text" class="form-control" name="id" value= "{% for i in schoolyear %}{{i.id}}{% endfor %}"required hidden>
-            <input type="date" class="form-control" name="sy_start" value= "{% for i in schoolyear %}{{i.sy_start|date:'Y-m-d'}}{% endfor %}"required>
-            <br>
-            <label>End of Cycle</label>
-            <input type="date" class="form-control" name="sy_end" value="{% for i in schoolyear %}{{i.sy_end|date:'Y-m-d'}}{% endfor %}" required>
-         </div>
-      </div>
-
-      <div class="col-12">
-         <button type="submit" class="btn btn-primary">Update Cycle</button>
-      </div> {% endcomment %}
    
 </form>
 

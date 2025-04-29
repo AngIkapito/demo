@@ -40,36 +40,41 @@
                     
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Membership Registration</h1>
+                            <h1 class="h4 text-gray-900 mb-4"> New Member Registration</h1>
                         </div>
 
-                        <form class="user" method="post" action=" {% url "registration_bypass1" %} " enctype="multipart/form-data" onsubmit="return validateForm()" >
+                        <form class="user" method="post" action=" {% url "registration_renew" %} " enctype="multipart/form-data" onsubmit="return validateForm()" >
                            {% csrf_token %}
                            {% include 'includes/messages.html' %}
 
                            <fieldset>
                       
                         <div class="form-group">
-                            {% comment %} <label for="is_superuser" hidden>Is Superuser?</label>
-                            <select class="form-control" id="is_superuser" name="is_superuser" hidden/>
-                                    <option value="1">True</option>  <!-- Current salutation as default -->
-                                    <option value="0" selected>False</option>  <!-- Default option if no salutation -->
-                            </select>  {% endcomment %}
                             <fieldset>
                                 <legend>Member Information</legend>
-        
-                                <label for="officertype_id" hidden>PSITE CL Officer?</label>
-                                <select class="form-control" id="officertype_id" name="officertype_id" hidden required/>
-                                <option value="9" selected>MEMBER ONLY</option>  <!-- Default option if no membership type is selected -->
-        
+                                <label for="membertype_id">MemberType</label>
+                                   <input type="text" class="form-control text-uppercase" id="membertype_id"
+                                         name="membertype_id" value="1" required/> 
+                                     
+                                    <label for="school_year_id">School Year ID</label>
+                                    <input type="text" class="form-control text-uppercase" id="school_year_id"
+                                            name="school_year_id" value="{{latest_school_year.id}}" required/>
+
+                                <label for="officertype_id">PSITE CL Officer?</label>
+                                <select class="form-control" id="officertype_id" name="officertype_id" required/>
+                                <option value="1" selected>MEMBER ONLY</option>  <!-- Default option if no membership type is selected -->
                                 {% for officertype in officertypes %}
-                                    {% if officertype.id != 9 and officertype.id != customuser.officertype_id %}  <!-- Exclude 'Non-Officer/Member only' and the current officertype -->
+                                    {% if officertype.id != 1 and officertype.id != customuser.officertype_id %}  <!-- Exclude 'Non-Officer/Member only' and the current officertype -->
                                         <option value="{{ officertype.id }}">{{ officertype.name }}</option>
                                     {% endif %}
-        
                                 {% endfor %}
-        
                                 </select>
+
+                                {% comment %} <label for="school_year_id">School Year</label>
+                                <select class="form-control" id="school_year_id" name="school_year_id" required>
+                                    <option value="{{latest_school_year.id}}" disabled selected>{{latest_school_year}}</option> <!-- Default option -->
+                                </select>
+                                <p>{{latest_school_year.id}}</p> {% endcomment %}
         
                                     <div class="form-group">
                                         <label for="membershiptype_id">Membership Type
@@ -83,14 +88,7 @@
                                                 <option value="{{ membershiptype.id }}">{{ membershiptype.name }} - {{membershiptype.price}} PESOS</option>
                                             {% endfor %}
                                         </select>
-        
-                                <label for="membertype_id">Member Type</label>
-                                <select class="form-control" id="membertype_id" name="membertype_id" required/>
-                                    <option value="" disabled selected>SELECT MEMBER TYPE</option>  <!-- Default option if no salutation -->
-                                    {% for membertype in membertypes %}
-                                        <option value="{{ membertype.id }}">{{ membertype.name }}</option>
-                                    {% endfor %}
-                                </select>
+
                                 
                                 </div>
                                 <div class="form-group">
@@ -133,12 +131,6 @@
                                         placeholder="Middle Name" name="middle_name"/>
                                 </div>
                             </div>
-        
-                            
-                            {% comment %} <div class="form-group">
-                                <label>Profile Picture</label>
-                                <input type="file" class="form-control" accept=".jpg, .jpeg, .png" name="profile_pic"/>
-                             </div>  {% endcomment %}
                            
                                 <div class="form-group">
                                     <label for="email">Email Address</label>
@@ -172,7 +164,7 @@
                                 </div>
                             </fieldset>
         
-                            {% comment %} <fieldset>
+                          <fieldset>
                                 <legend>Login Information</legend>
         
                                 <div class="form-group">
@@ -183,7 +175,7 @@
                                     </label>
                                     <input type="text" class="form-control text-lowercase" id="username" placeholder="Username" name="username" required/>
                                 </div>
-                            
+                             {% comment %} {% endcomment %}
                                 <div class="form-group">
                                         <label for="password">Password</label>
                                         <div class="input-group">
@@ -198,8 +190,8 @@
                                                 <button  title="Generate Password" class="btn btn-outline-secondary" type="button" onclick="generatePassword()"><i class="fas fa-dice"></i></button>
                                             </div>
                                         </div>
-                                        
-                            </fieldset> {% endcomment %}
+                            </fieldset> 
+                            
                             <div id="notificationArea" class="alert alert-danger d-none" role="alert"></div>
                             <div class="col-sm mb-3">
                                 <div class="form-group">
@@ -265,7 +257,63 @@
          return true;
      }
      
-     function isValidPassword(password) {
+ </script>
+
+{% comment %} For Generating password 8 characters 
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+        
+        // Toggle the type attribute
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        // Toggle the eye icon
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+    }
+</script>
+{% endcomment %}
+
+<script>
+    document.getElementById('contact_no').addEventListener('input', function (e) {
+        // Remove any non-numeric characters
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>
+
+<script>
+    // Get today's date
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, '0');
+
+    // Set the value of the date input to today's date
+    document.getElementById('birthdate').value = `${year}-${month}-${day}`;
+    document.getElementById('payment_date').value = `${year}-${month}-${day}`;
+</script>
+
+{% comment %} Show or Hide password {% endcomment %}
+{% comment %} <script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+
+        // Toggle the type attribute
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye'); // Corrected class name
+            eyeIcon.classList.add('fa-eye-slash'); // Corrected class name
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash'); // Corrected class name
+            eyeIcon.classList.add('fa-eye'); // Corrected class name
+        }
+    }
+
+    function isValidPassword(password) {
          // Check if the password is at least 8 characters long
          if (password.length < 8) {
              document.getElementById("notificationArea").innerHTML += "Password must be at least 8 characters long.<br>";
@@ -304,24 +352,8 @@
      
          return true;
      }
- </script>
 
-{% comment %} For Generating password 8 characters {% endcomment %}
-<script>
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('password');
-        const eyeIcon = document.getElementById('eye-icon');
-        
-        // Toggle the type attribute
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        
-        // Toggle the eye icon
-        eyeIcon.classList.toggle('fa-eye');
-        eyeIcon.classList.toggle('fa-eye-slash');
-    }
-
-    function generatePassword() {
+     function generatePassword() {
         const length = 8; // Desired length of the password
         //const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
         const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -333,45 +365,6 @@
         }
         
         document.getElementById('password').value = password; // Set the generated password in the input field
-    }
-</script>
-
-
-<script>
-    document.getElementById('contact_no').addEventListener('input', function (e) {
-        // Remove any non-numeric characters
-        this.value = this.value.replace(/[^0-9]/g, '');
-    });
-</script>
-
-<script>
-    // Get today's date
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const day = String(today.getDate()).padStart(2, '0');
-
-    // Set the value of the date input to today's date
-    document.getElementById('birthdate').value = `${year}-${month}-${day}`;
-    document.getElementById('payment_date').value = `${year}-${month}-${day}`;
-</script>
-
-{% comment %} Show or Hide password {% endcomment %}
-{% comment %} <script>
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('password');
-        const eyeIcon = document.getElementById('eye-icon');
-
-        // Toggle the type attribute
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            eyeIcon.classList.remove('fa-eye'); // Corrected class name
-            eyeIcon.classList.add('fa-eye-slash'); // Corrected class name
-        } else {
-            passwordInput.type = 'password';
-            eyeIcon.classList.remove('fa-eye-slash'); // Corrected class name
-            eyeIcon.classList.add('fa-eye'); // Corrected class name
-        }
     }
 </script> {% endcomment %}
 <script>

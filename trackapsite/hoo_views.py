@@ -76,7 +76,7 @@ def DELETE_SCHOOLYEAR(request, id):
 def ADD_MEMBER(request):
     salutations = Salutation.objects.all()
     membershiptypes = MembershipType.objects.all()
-    membertypes = MemberType.objects.all()
+    # membertypes = MemberType.objects.all()
     officertypes = OfficerType.objects.all()
     organizations = Organization.objects.all()
     # customuser = CustomUser.objects.all()
@@ -87,7 +87,7 @@ def ADD_MEMBER(request):
         # user_type = request.POST.get('user_type')
         
         membershiptype_id = request.POST.get('membershiptype_id')
-        membertype_id = request.POST.get('membertype_id')
+        # membertype_id = request.POST.get('membertype_id')
         organization_id = request.POST.get('organization_id')
         
         salutation_id = request.POST.get('salutation_id')
@@ -146,7 +146,7 @@ def ADD_MEMBER(request):
             member = Member(
                 admin = user, 
                 membershiptype_id = membershiptype_id,
-                membertype_id = membertype_id,
+                # membertype_id = membertype_id,
                 officertype_id = officertype_id,
                 organization_id = organization_id,
                 
@@ -170,7 +170,7 @@ def ADD_MEMBER(request):
     context = {
         'salutations': salutations,  # Pass the salutations to the template
         'membershiptypes':membershiptypes,
-        'membertypes': membertypes,
+        # 'membertypes': membertypes,
         'officertypes': officertypes,
         'organizations': organizations,
     }
@@ -183,7 +183,7 @@ def VIEWALL_MEMBER(request):
     members = Member.objects.all()
     salutations = Salutation.objects.all()
     membershiptypes = MembershipType.objects.all()
-    membertypes = MemberType.objects.all()
+    # membertypes = MemberType.objects.all()
     officertypes = OfficerType.objects.all()
     organizations = Organization.objects.all()
     
@@ -192,7 +192,7 @@ def VIEWALL_MEMBER(request):
         'members':members,
         'salutations': salutations,  # Pass the salutations to the template
         'membershiptypes':membershiptypes,
-        'membertypes': membertypes,
+        # 'membertypes': membertypes,
         'officertypes': officertypes,
         'organizations': organizations,
     }
@@ -202,7 +202,7 @@ def VIEWALL_MEMBER(request):
 def EDIT_MEMBER(request, id):
     salutations = Salutation.objects.all()
     membershiptypes = MembershipType.objects.all()
-    membertypes = MemberType.objects.all()
+    # membertypes = MemberType.objects.all()
     officertypes = OfficerType.objects.all()
     organizations = Organization.objects.all()
     
@@ -215,7 +215,7 @@ def EDIT_MEMBER(request, id):
         'member': member,
         'salutations': salutations,  # Pass the salutations to the template
         'membershiptypes': membershiptypes,
-        'membertypes': membertypes,
+        # 'membertypes': membertypes,
         'officertypes': officertypes,
         'organizations': organizations,
     }
@@ -230,13 +230,13 @@ def UPDATE_MEMBER(request):
         user_type = request.POST.get('user_type')
         
         membership_type = request.POST.get('membership_type')
-        member_type = request.POST.get('member_type')
+        # member_type = request.POST.get('member_type')
         
         salutation = request.POST.get('salutation')
         first_name = request.POST.get('first_name').upper()
         last_name = request.POST.get('last_name').upper()
         middle_name = request.POST.get('middle_name').upper()
-        # profile_pic = request.FILES.get('profile_pic')
+        profile_pic = request.FILES.get('profile_pic')
         position = request.POST.get('position').upper()
         email = request.POST.get('email')
         contact_no = request.POST.get('contact_no')
@@ -260,13 +260,13 @@ def UPDATE_MEMBER(request):
         customuser.user_type = user_type
         
         customuser.membership_type = membership_type
-        customuser.member_type = member_type
+        # customuser.member_type = 1
         
         customuser.salutation = salutation
         customuser.first_name = first_name
         customuser.last_name = last_name
         customuser.middle_name = middle_name
-        # customuser.profile_pic = request.FILES.get('profile_pic')
+        customuser.profile_pic = profile_pic
         customuser.position = position
         customuser.email = email
         customuser.contact_no = contact_no
@@ -303,7 +303,6 @@ def MEMBER_DETAILS(request,id):
     context = {
         'member':member,
         'selected_member':selected_member,
-        # 'municipality':municipality
    
     }
     return render(request, 'hoo/member_details.html', context)
@@ -710,3 +709,12 @@ def UPDATE_ANNOUNCEMENT(request):
         messages.success(request, "Announcement successfully updated")
         return redirect('view_announcement')
     return render(request, 'hoo/edit_announcement.html')
+
+def MEMBERSHIP_REGISTRATION(request):
+    schoolyear = School_Year.objects.all()
+    
+    context = {
+        'schoolyear':schoolyear,
+    }
+    # print(teacher)
+    return render(request, 'hoo/membership_registration.html', context)

@@ -1,4 +1,5 @@
 {% extends "includes/base.html" %}
+{% load static %}
 {% block content %}  
 <style>
     .member-info {
@@ -31,10 +32,9 @@
             <a href="{% url 'viewall_member' %}" class="btn btn-secondary mb-3" title="Go Back">
                 <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
             </a>
-            <div class="col-lg-5 text-center">
-                <!-- Profile Picture -->
-                <img src="{{ member.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle mb-4" style="width: 150px; height: 150px;">
-            </div>  
+            <div class="image-preview text-center" id="imagePreview" style="display: block;">
+                <img id="preview" src="{% if member.admin.profile_pic %}{{ member.admin.profile_pic.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}" alt="Image Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;">
+            </div>
                 
             <div class="card-body text-center">
                 <h6 class="text-gray-800 text-center">Member Information: <br><b>{{ member.salutation }} {{ member.admin.first_name }} {{ member.admin.last_name }}</b></h6>

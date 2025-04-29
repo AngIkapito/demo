@@ -15,12 +15,26 @@
             
             <a href="{% url 'hoo_home' %}" class="btn btn-secondary" title="Go Back">
                 <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back</a>
-             <h1 class="h3 mb-0 text-gray-800">Member List</h1>
+             <h1 class="h3 mb-0 text-gray-800">Membership Registration</h1>
              {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
-               <a href="{% url 'add_member' %}" class="btn btn-primary" title="Add Member">
-                <i class="fas fa-plus"></i>&nbsp;&nbsp; Member
-            </a>
+               
+                <select class="form-select form-control" aria-label="Default select example">
+                    <option selected>Cycle</option>
+                    <option value="1">One</option>
+                </select>
+                <select class="form-select form-control" aria-label="Default select example">
+                    <option selected>MembershipType</option>
+                    <option value="1">One</option>
+                </select>
+                <select class="form-select form-control" aria-label="Default select example">
+                    <option selected>Organization</option>
+                    <option value="1">One</option>
+                </select>
+                <select class="form-select form-control" aria-label="Default select example">
+                    <option selected>MemberType</option>
+                    <option value="1">One</option>
+                </select>
             </div>
       </div>
      
@@ -30,8 +44,9 @@
                 <tr>
                    <th>Firstname</th>
                    <th>Lastname</th>
-                   <th>School/Organization</th>
+                   <th>School</th>
                    <th>Position</th>
+                   {% comment %} <th>MemberType</th> {% endcomment %}
                    <th>MembershipType</th>
                    <th class="text-center">Action</th>
                 </tr>
@@ -40,20 +55,22 @@
                <tr>
                   <th>Firstname</th>
                   <th>Lastname</th>
-                  <th>School/Organization</th>
+                  <th>School</th>
                   <th>Position</th>
+                  {% comment %} <th>MemberType</th> {% endcomment %}
                   <th>MembershipType</th>
                   <th class="text-center">Action</th>
                </tfoot>
             </thead>
             
             <tbody>
-                {% for i in members %}
-                    <tr> 
-                        <td>{{ i.admin.first_name|upper }}</td>  
-                        <td>{{ i.admin.last_name|upper }}</td>  <!-- Accessing first name from the related CustomUser  -->
-                        <td>{{ i.organization.name|upper }}</td>   <!-- Accessing last name from the related CustomUser  -->
+                {% for i in memberships %}
+                    <tr>
+                        <td>{{ i.admin.first_name|upper }}</td>  <!-- Accessing first name from the related CustomUser  -->
+                        <td>{{ i.admin.last_name|upper }}</td>   <!-- Accessing last name from the related CustomUser  -->
+                        <td>{{ i.organization.name }}</td> <!-- Accessing last name from the related CustomUser  -->
                         <td>{{ i.position|upper }}</td>
+                        {% comment %} <td>{{ i.membertype.name|upper }}</td>   <!-- Accessing member type name --> {% endcomment %}
                         <td>{{ i.membershiptype.name|upper }}</td>  <!-- Accessing membership type name -->
                         <td class="text-center">
                             <div class="d-flex justify-content-center align-items-center">

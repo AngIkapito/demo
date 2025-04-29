@@ -20,7 +20,7 @@ admin.site.register(Region)
 
 @admin.register(Announcement)
 class AnnouncementAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_by','get_tags']
+    list_display = ['title','get_tags']
     
     def get_tags(self, obj):
         return ", ".join(o for o in obj.tags.names())

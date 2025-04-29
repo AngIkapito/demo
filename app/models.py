@@ -18,7 +18,6 @@ class CustomUser(AbstractUser):
     
 class Salutation(models.Model):
     name = models.CharField(max_length=20)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='salutations')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -29,7 +28,6 @@ class Salutation(models.Model):
 class Region(models.Model):
     name = models.CharField(max_length=100)
     info = models.CharField(max_length=100)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='regions')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -42,7 +40,6 @@ class Organization(models.Model):
     type = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='org_logo/')
     telephone = models.CharField(max_length=15, blank=True, null=True)  # New telephone field
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='organizations')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -52,7 +49,6 @@ class Organization(models.Model):
 class School_Year(models.Model):
     sy_start = models.DateField()
     sy_end = models.DateField()
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='schoolyears')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -62,7 +58,6 @@ class School_Year(models.Model):
 class MemberType(models.Model):
     name = models.CharField(max_length=100)
     info = models.CharField(max_length=100)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='membertypes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -73,7 +68,6 @@ class MembershipType(models.Model):
     name = models.CharField(max_length=100)
     info = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='membershiptypes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -83,7 +77,6 @@ class MembershipType(models.Model):
 class OfficerType(models.Model):
     name = models.CharField(max_length=100)
     info = models.CharField(max_length=100)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='officertypes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -135,7 +128,7 @@ class Event(models.Model):
     banner = models.ImageField(upload_to='eventbanner/', blank=True, null=True)  # New field for the event poster
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
-    created_by = models.ForeignKey(CustomUser , on_delete=models.CASCADE, related_name='events')
+    created_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     max_attendees = models.PositiveIntegerField(default=0)
@@ -165,7 +158,7 @@ class Announcement(models.Model):
     description = models.TextField()  # Changed to TextField for longer descriptions
     banner = models.ImageField(upload_to='announcementbanner/')  # Simplified upload path
     status = models.BooleanField(default=True)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='announcements')
+    created_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)  # Change to SET_NULL
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

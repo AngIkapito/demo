@@ -15,11 +15,11 @@
             
             <a href="{% url 'hoo_home' %}" class="btn btn-secondary" title="Go Back">
                 <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back</a>
-             <h1 class="h3 mb-0 text-gray-800">Member List</h1>
+             <h1 class="h3 mb-0 text-gray-800">Competition List</h1>
              {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
                <a href="{% url 'add_member' %}" class="btn btn-primary" title="Add Member">
-                <i class="fas fa-plus"></i>&nbsp;&nbsp; Member
+                <i class="fas fa-plus"></i>&nbsp;&nbsp; Competition
             </a>
             </div>
       </div>
@@ -28,20 +28,24 @@
            <table class="table text-center text-uppercase table-bordered" id="dataTable" width="100%" cellspacing="0" >
              <thead>
                 <tr>
+                   <th>Salutation</th>
                    <th>Firstname</th>
                    <th>Lastname</th>
-                   <th>School/Organization</th>
+                   {% comment %} <th>School</th> {% endcomment %}
                    <th>Position</th>
+                   {% comment %} <th>MemberType</th> {% endcomment %}
                    <th>MembershipType</th>
                    <th class="text-center">Action</th>
                 </tr>
              </thead>
              <tfoot>
                <tr>
+                  <th>Salutation</th>
                   <th>Firstname</th>
                   <th>Lastname</th>
-                  <th>School/Organization</th>
+                  {% comment %} <th>School</th> {% endcomment %}
                   <th>Position</th>
+                  {% comment %} <th>MemberType</th> {% endcomment %}
                   <th>MembershipType</th>
                   <th class="text-center">Action</th>
                </tfoot>
@@ -49,11 +53,12 @@
             
             <tbody>
                 {% for i in members %}
-                    <tr> 
-                        <td>{{ i.admin.first_name|upper }}</td>  
-                        <td>{{ i.admin.last_name|upper }}</td>  <!-- Accessing first name from the related CustomUser  -->
-                        <td>{{ i.organization.name|upper }}</td>   <!-- Accessing last name from the related CustomUser  -->
+                    <tr>
+                        <td>{{ i.salutation.name }}</td>  <!-- Correctly accessing the name of the salutation -->
+                        <td>{{ i.admin.first_name|upper }}</td>  <!-- Accessing first name from the related CustomUser  -->
+                        <td>{{ i.admin.last_name|upper }}</td>   <!-- Accessing last name from the related CustomUser  -->
                         <td>{{ i.position|upper }}</td>
+                        {% comment %} <td>{{ i.membertype.name|upper }}</td>   <!-- Accessing member type name --> {% endcomment %}
                         <td>{{ i.membershiptype.name|upper }}</td>  <!-- Accessing membership type name -->
                         <td class="text-center">
                             <div class="d-flex justify-content-center align-items-center">
