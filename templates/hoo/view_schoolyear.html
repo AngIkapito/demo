@@ -36,10 +36,22 @@
                    <th>End of Cycle</th>
                    <th>Created at</th>
                    <th>Updated at</th>
-                   <th>Created by</th>
+                   {% comment %} <th>Created by</th> {% endcomment %}
                    <th class=" text-center">Action</th>
                 </tr>
              </thead>
+             <tfoot>
+               <tr>
+                  {% comment %} <th>ID</th> {% endcomment %}
+                  <th>Cycle</th>
+                  <th>Start of Cycle</th>
+                  <th>End of Cycle</th>
+                  <th>Created at</th>
+                  <th>Updated at</th>
+                  {% comment %} <th>Created by</th> {% endcomment %}
+                  <th class=" text-center">Action</th>
+               </tr>
+            </tfoot>
              <tbody>
                {% for i in schoolyear %}
                 <tr>
@@ -49,7 +61,7 @@
                    <td>{{i.sy_end}}</td>
                    <td>{{i.created_at}}</td>
                    <td>{{i.updated_at}}</td>
-                   <td>{{i.created_by.username}}</td>
+                   {% comment %} <td>{{i.created_by.username}}</td> {% endcomment %}
                    <td class="text-right">
                       <div class="actions text-center">
                          <a href="{% url 'edit_schoolyear' i.id %}" class="btn btn-sm bg-success-light" data-toggle="tooltip" data-placement="top" title="Edit">

@@ -58,7 +58,7 @@
                    {% comment %} <td>{{i.id}}</td> {% endcomment %}
                    <td>{{i.title|upper}}</td>
                    <td>{{ i.description|upper|truncatewords:3 }}</td>
-                   <td><img src="{{i.banner}}" alt="Banner Image" style="max-width: 100px; max-height: 100px;"/></td>
+                   <td><img src="{{i.banner.url}}" alt="Banner Image" style="max-width: 100px; max-height: 100px;"/></td>
 
                    {% comment %} <td>{% if announcement.0.banner.url %}
                      <img src="{{ announcement.0.banner.url }}" alt="Banner Image" style="max-width: 100px; max-height: 100px;" enctype="multipart/form-data">

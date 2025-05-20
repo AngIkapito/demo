@@ -27,6 +27,14 @@
     {% csrf_token %}
        {% include 'includes/messages.html' %}
 
+
+    <div class="col-sm-11">
+        <label for="organization_logo">Logo</label>
+        <input type="file" class="form-control" id="organization_logo" name="organization_logo" accept="image/*" onchange="previewImage(event)" />
+    
+        <img id="logo_preview" src="" alt="Logo Preview" style="width: 192px; height: 192px; object-fit: cover; margin-top: 10px;border: 2px solid gray; border-radius: 4px;" />
+    </div>
+<br>
        <div class="col-sm-11">
          <label for="organization_initials">Initials</label>
          <input type="text" class="form-control text-uppercase" id="organization_initials"  name="organization_initials"
@@ -46,13 +54,6 @@
             <option value="ACADEME">ACADEME</option>
             <option value="INDUSTRY">INDUSTRY</option>
         </select>
-    </div>
-
-    <div class="col-sm-11">
-        <label for="organization_logo">Logo</label>
-        <input type="file" class="form-control" id="organization_logo" name="organization_logo" accept="image/*" onchange="previewImage(event)" />
-        <br>
-        <img id="logo_preview" src="" alt="Logo Preview" style="display: none; width: 2in; height: 2in; border: 1px solid #ccc;" />
     </div>
 
     <div class="col-sm-11">
