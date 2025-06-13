@@ -104,6 +104,7 @@ urlpatterns = [
     
     #Member Panel
     path('member/home', member_views.home, name='member_home'),
+    path('member/basic_information', member_views.basic_information, name='basic_information'),
     #path('member/registration_member', member_views.REGISTRATION_MEMBER, name='registration_member'),
     
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

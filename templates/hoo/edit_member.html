@@ -14,8 +14,10 @@
 <!-- DITO KA MAS START MAGLAGAY NG LAMAN NG BODY -->
 
 <div class="col-sm-12">
-    
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <a href="{% url 'viewall_member' %}" class="btn btn-secondary" title="Go Back">
+          <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
+      </a>
+     <div class="text-center flex-grow-1">
         <h1 class="h3 mb-0 text-gray-800">Edit Member</h1>
     </div>
  </div>
@@ -28,8 +30,8 @@
          <div class="form-group">
             <p style="color: red" hidden>Current Member/CustomUser ID: {{ member.admin.id }}</p>
              <input type="text" class="form-control" id="member_id" name="member_id" value= "{{ member.admin.id }}" hidden required/>
-             <label for="is_superuser"  hidden>Is Superuser?</label>
-             <select class="form-control" id="is_superuser" name="is_superuser"   hidden>
+             <label for="is_superuser" hidden>Is Superuser?</label>
+             <select class="form-control" id="is_superuser" name="is_superuser" hidden>
                 {% if member.admin.is_superuser == 1 %}
                     <option value="{{ member.admin.is_superuser}}" selected> {{ member.admin.is_superuser }} </option>  <!-- Current user type as default -->
                     <option value="0">False</option>

@@ -11,4 +11,6 @@ from django.utils.safestring import mark_safe
 def home(request):
     return render(request,'member/home.html')
 
+def basic_information(request):
+    return render(request,'member/basic_information.html')
 

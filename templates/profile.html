@@ -13,8 +13,25 @@
                 {% csrf_token %}
                
                    <div class="col-12">
-                      <h5 class="form-title"><span>Profile Update</span></h5>
+                        
+                     {% if user.user_type == '1' %}
+                       <a href="{% url 'hoo_home' %}" class="btn btn-secondary" title="Go Back">
+                           <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
+                        </a>
+                     {% elif user.user_type == '2' %}
+                        <a href="{% url 'officer_home' %}" class="btn btn-secondary" title="Go Back">
+                              <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
+                           </a>
+                     {% elif user.user_type == '3' %}
+                           <a href="{% url 'member_home' %}" class="btn btn-secondary" title="Go Back">
+                              <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back
+                           </a>
+                     {% endif %}
+                        <div class="text-center flex-grow-1">
+                           <h1 class="h3 mb-0 text-gray-800"><span>Profile Update</span></h1>
+                        </div>
                    </div>
+
                      <div class="col-sm-11">
                         <div class="form-group">
                             <label>Profile Picture</label>
@@ -142,7 +159,7 @@
                submitButton.disabled = true; // Disable the button if there are errors
            } else {
                complianceMessages.style.display = 'none'; // Hide compliance messages
-               submitButton.disabled = false; // Enable the button if all requirements are met
+               submitButton.disabled = password === repeatPassword ? false : true; // Enable the button if all requirements are met
            }
        }
 
