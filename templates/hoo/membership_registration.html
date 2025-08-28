@@ -19,7 +19,7 @@
              {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
                
-                <select class="form-select form-control" aria-label="Default select example">
+                {% comment %} <select class="form-select form-control" aria-label="Default select example">
                     <option selected>Cycle</option>
                     <option value="1">One</option>
                 </select>
@@ -34,7 +34,7 @@
                 <select class="form-select form-control" aria-label="Default select example">
                     <option selected>MemberType</option>
                     <option value="1">One</option>
-                </select>
+                </select> {% endcomment %}
             </div>
       </div>
      
@@ -64,7 +64,7 @@
             </thead>
             
             <tbody>
-                {% for i in memberships %}
+                {% for i in membership %}
                     <tr>
                         <td>{{ i.admin.first_name|upper }}</td>  <!-- Accessing first name from the related CustomUser  -->
                         <td>{{ i.admin.last_name|upper }}</td>   <!-- Accessing last name from the related CustomUser  -->

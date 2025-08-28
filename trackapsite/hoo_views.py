@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, HttpResponse, get_object_or_404
 from django.urls import path, include, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from app.models import CustomUser, School_Year,Announcement, Salutation,Organization, MemberType, MembershipType, Member, OfficerType, Region
+from app.models import CustomUser, Event, School_Year,Announcement, Salutation,Organization, MemberType, MembershipType, Member, OfficerType, Region
 from django.utils.safestring import mark_safe
 from django.utils import timezone
 from django.http import JsonResponse
@@ -11,7 +11,15 @@ import datetime
 # Create your views here.
 @login_required(login_url='/')
 def home(request):
-    return render(request,'hoo/home.html')
+    members = Member.objects.all()
+    events = Event.objects.all()
+    
+    context = {
+        'members': members,
+        'events': events,
+    }
+    
+    return render(request,'hoo/home.html', context)
 
 # For Schoolyear 
 def ADD_SCHOOLYEAR(request):
@@ -559,7 +567,7 @@ def ADD_ORGANIZATION(request):
         organization_initials = request.POST.get('organization_initials')
         organization_name = request.POST.get('organization_name')
         organization_type = request.POST.get('organization_type')
-        # organization_logo = request.FILES.get('organization_logo')
+        organization_logo = request.FILES.get('organization_logo')
         organization_telno = request.POST.get('organization_telno')
         # print(program_name)
         
@@ -567,9 +575,9 @@ def ADD_ORGANIZATION(request):
             initials = organization_initials,
             name = organization_name,
             type = organization_type,
-            # logo = organization_logo,
+            logo = organization_logo,
             telephone = organization_telno,
-            created_by_id=request.user.id  # Set the created_by_username to the current user
+            # created_by_id=request.user.id  # Set the created_by_username to the current user
         )
         organization.save()
         messages.success(request, 'Organization successfully added!')
@@ -599,7 +607,7 @@ def UPDATE_ORGANIZATION(request):
         organization_initials = request.POST.get('organization_initials')
         organization_name = request.POST.get('organization_name')
         organization_type = request.POST.get('organization_type')
-        # organization_logo = request.FILES.get('organization_logo')
+        organization_logo = request.FILES.get('organization_logo')
         organization_telno = request.POST.get('organization_telno')
         # print(program)
         
@@ -607,7 +615,7 @@ def UPDATE_ORGANIZATION(request):
         organization.initials = organization_initials
         organization.name = organization_name
         organization.type = organization_type
-        # organization.logo = organization_logo
+        organization.logo = organization_logo
         organization.telephone = organization_telno
         
         organization.save()
@@ -718,3 +726,13 @@ def MEMBERSHIP_REGISTRATION(request):
     }
     # print(teacher)
     return render(request, 'hoo/membership_registration.html', context)
+
+def VIEWALL_EVENT(request):
+    event = Event.objects.all()
+    
+    context = {
+        'event':event,
+    }
+    # print(teacher)
+    return render(request, 'hoo/viewall_event.html', context)
+

@@ -88,6 +88,7 @@ class Member(models.Model):
     
     #Personal Information of Member
     middle_name = models.CharField(max_length=100,default="")
+    
     contact_no = models.CharField(max_length=13,default="")
     birthdate = models.DateField(null=True, blank=True)
     gender =  models.CharField(max_length=6)

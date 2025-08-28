@@ -51,13 +51,13 @@
                   {% comment %} <th>Created at</th> {% endcomment %}
                   {% comment %} <th>Updated at</th> {% endcomment %}
                   {% comment %} <th>Created by</th> {% endcomment %}
-                  <th class=" text-center">Action</th>
+                  <th class="text-center">Action</th>
                </tr>
             </tfoot>
              <tbody>
                {% for i in organization %}
                 <tr>
-                  <td>{{i.logo.url}}</td>
+                  <td><img src="{{i.logo}}" alt="Logo Image" style="max-width: 100px; max-height: 100px;"/></td>
                    <td>{{i.initials|upper}}</td>
                    <td>{{i.name|upper}}</td>
                    <td>{{i.type|upper}}</td>
